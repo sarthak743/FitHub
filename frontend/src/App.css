@@ -1,7 +1,7 @@
 /* FitHub app shell and layout repair utilities */
 
 :root {
-  --sidebar-width: 220px;
+  --sidebar-width: 208px;
   --header-height: 56px;
   --page-gutter: 28px;
   --content-gap: 24px;

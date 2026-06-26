@@ -3,72 +3,150 @@
 // Stat Card
 export function StatCard({ label, value, unit, sublabel, color = 'violet', icon: Icon, trend }) {
   const colors = {
-    violet: { accent: '#8b5cf6', glow: 'rgba(124, 58, 237, 0.2)', border: 'rgba(124, 58, 237, 0.2)' },
-    cyan: { accent: '#06b6d4', glow: 'rgba(6, 182, 212, 0.15)', border: 'rgba(6, 182, 212, 0.2)' },
-    green: { accent: '#10b981', glow: 'rgba(16, 185, 129, 0.15)', border: 'rgba(16, 185, 129, 0.2)' },
-    amber: { accent: '#f59e0b', glow: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245, 158, 11, 0.2)' },
-    pink: { accent: '#ec4899', glow: 'rgba(236, 72, 153, 0.15)', border: 'rgba(236, 72, 153, 0.2)' },
+    violet: { accent: '#8b5cf6', glow: 'rgba(124, 58, 237, 0.15)', border: 'rgba(124, 58, 237, 0.15)', hoverBorder: 'rgba(139, 92, 246, 0.35)' },
+    cyan: { accent: '#06b6d4', glow: 'rgba(6, 182, 212, 0.12)', border: 'rgba(6, 182, 212, 0.15)', hoverBorder: 'rgba(6, 182, 212, 0.35)' },
+    green: { accent: '#10b981', glow: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.15)', hoverBorder: 'rgba(16, 185, 129, 0.35)' },
+    amber: { accent: '#f59e0b', glow: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.15)', hoverBorder: 'rgba(245, 158, 11, 0.35)' },
+    pink: { accent: '#ec4899', glow: 'rgba(236, 72, 153, 0.12)', border: 'rgba(236, 72, 153, 0.15)', hoverBorder: 'rgba(236, 72, 153, 0.35)' },
   };
   const c = colors[color] || colors.violet;
 
   return (
     <div
-      className="rounded-lg p-4 relative overflow-hidden"
+      className="relative overflow-hidden"
       style={{
-        background: 'rgba(13, 15, 26, 0.8)',
+        borderRadius: 12,
+        background: 'rgba(13, 15, 26, 0.85)',
         border: `1px solid ${c.border}`,
         backdropFilter: 'blur(12px)',
+        transition: 'all 0.3s cubic-bezier(0.23,1,0.32,1)',
+        cursor: 'default',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = c.hoverBorder;
+        e.currentTarget.style.transform = 'translateY(-2px)';
+        e.currentTarget.style.boxShadow = `0 12px 28px -8px ${c.glow}, 0 0 0 1px ${c.border}`;
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = c.border;
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = 'none';
       }}
     >
+      {/* Accent top bar */}
+      <div style={{
+        height: 2,
+        background: `linear-gradient(90deg, ${c.accent}, ${c.accent}60)`,
+        opacity: 0.6,
+      }} />
+      {/* Ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse at top right, ${c.glow}, transparent 70%)` }}
       />
-      <div className="relative">
-        <div className="flex items-start justify-between mb-2">
-          <div
-            className="text-xs uppercase tracking-widest"
-            style={{ color: '#8b90b8', fontFamily: 'JetBrains Mono', fontSize: '0.58rem' }}
+      <div className="relative" style={{ padding: '18px 20px 16px' }}>
+        {/* Top row: label + icon */}
+        <div className="flex items-center justify-between" style={{ marginBottom: 12 }}>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: '#8b90b8',
+              fontSize: '0.56rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+            }}
           >
             {label}
-          </div>
+          </span>
           {Icon && (
-            <Icon size={14} style={{ color: c.accent }} />
+            <div
+              className="flex items-center justify-center"
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: 8,
+                background: `${c.accent}12`,
+                border: `1px solid ${c.accent}20`,
+              }}
+            >
+              <Icon size={15} style={{ color: c.accent }} />
+            </div>
           )}
         </div>
-        <div className="flex items-end gap-1">
+        {/* Value row */}
+        <div className="flex items-baseline" style={{ gap: 5 }}>
           <span
-            className="stat-number"
-            style={{ fontSize: '1.75rem', color: '#e8eaff' }}
+            style={{
+              fontFamily: "'Orbitron', monospace",
+              fontSize: '1.65rem',
+              fontWeight: 700,
+              color: '#e8eaff',
+              lineHeight: 1,
+            }}
           >
             {value}
           </span>
           {unit && (
             <span
-              className="mb-1 font-mono-code"
-              style={{ color: c.accent, fontSize: '0.7rem' }}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                color: c.accent,
+                fontSize: '0.68rem',
+                fontWeight: 600,
+              }}
             >
               {unit}
             </span>
           )}
         </div>
+        {/* Sublabel */}
         {sublabel && (
-          <div className="text-xs mt-1" style={{ color: '#8b90b8' }}>
+          <div
+            style={{
+              color: '#8b90b8',
+              fontSize: '0.72rem',
+              marginTop: 6,
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
             {sublabel}
           </div>
         )}
+        {/* Trend */}
         {trend && (
           <div
-            className="mt-1 text-xs font-mono-code"
-            style={{ color: trend.positive ? '#10b981' : '#ec4899', fontSize: '0.65rem' }}
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: trend.positive ? '#10b981' : '#ec4899',
+              fontSize: '0.6rem',
+              fontWeight: 700,
+              marginTop: 6,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
           >
-            {trend.positive ? '▲' : '▼'} {trend.value}
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 16,
+              height: 16,
+              borderRadius: 4,
+              background: trend.positive ? 'rgba(16,185,129,0.1)' : 'rgba(236,72,153,0.1)',
+              fontSize: '0.55rem',
+            }}>
+              {trend.positive ? '▲' : '▼'}
+            </span>
+            {trend.value}
           </div>
         )}
       </div>
     </div>
   );
 }
+
 
 // Progress Ring (SVG)
 export function ProgressRing({ percent, size = 80, stroke = 5, color = '#8b5cf6', label, value }) {

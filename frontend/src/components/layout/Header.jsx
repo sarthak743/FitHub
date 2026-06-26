@@ -1,9 +1,41 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Flame } from 'lucide-react';
 import { user } from '../../data/mockData.js';
 
+/* ── Inject keyframe once globally ── */
+const ANIM_ID = 'header-profile-anim';
+if (typeof document !== 'undefined' && !document.getElementById(ANIM_ID)) {
+  const style = document.createElement('style');
+  style.id = ANIM_ID;
+  style.textContent = `
+    @keyframes hdr-slideDown {
+      from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hdr-stat-tile {
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .hdr-stat-tile:hover {
+      border-color: rgba(139,92,246,0.2) !important;
+      background: rgba(124,58,237,0.09) !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 export default function Header({ activePage, onNavigate }) {
-  const [profileHovered, setProfileHovered] = useState(false);
+  const [profileVisible, setProfileVisible] = useState(false);
+  const hideTimer = useRef(null);
+
+  /* ── Hover helpers with 180ms close delay for smooth UX ── */
+  const showProfile = useCallback(() => {
+    clearTimeout(hideTimer.current);
+    setProfileVisible(true);
+  }, []);
+
+  const hideProfile = useCallback(() => {
+    hideTimer.current = setTimeout(() => setProfileVisible(false), 180);
+  }, []);
 
   const pageLabels = {
     dashboard: 'Dashboard',
@@ -28,10 +60,17 @@ export default function Header({ activePage, onNavigate }) {
     day: 'numeric',
   });
 
-  /* Derived BMI */
-  const bmi = user.weight && user.height
-    ? (user.weight / ((user.height / 100) ** 2)).toFixed(1)
-    : '—';
+  const bmi =
+    user.weight && user.height
+      ? (user.weight / (user.height / 100) ** 2).toFixed(1)
+      : '—';
+
+  const initials = (user.name || 'AS')
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <header
@@ -41,26 +80,33 @@ export default function Header({ activePage, onNavigate }) {
         height: 'var(--header-height)',
         padding: '0 28px',
         background: 'rgba(8,9,15,0.92)',
-        borderBottom: '1px solid rgba(124,58,237,0.1)',
-        backdropFilter: 'blur(14px)',
+        borderBottom: '1px solid rgba(124,58,237,0.08)',
+        backdropFilter: 'blur(16px)',
       }}
     >
       {/* ── Left: page breadcrumb ── */}
       <div className="flex items-center gap-3">
         <div>
           <div
-            className="font-display font-bold"
             style={{
               color: '#e8eaff',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               letterSpacing: '0.14em',
+              fontFamily: "'Orbitron', monospace",
+              fontWeight: 700,
             }}
           >
             {pageLabels[activePage]?.toUpperCase()}
           </div>
           <div
-            className="font-mono"
-            style={{ color: '#3d4168', fontSize: '0.6rem', marginTop: '2px', letterSpacing: '0.08em' }}
+            style={{
+              color: '#3d4168',
+              fontSize: '0.58rem',
+              marginTop: 2,
+              letterSpacing: '0.08em',
+              fontFamily: "'JetBrains Mono', monospace",
+              fontWeight: 600,
+            }}
           >
             {dateStr.toUpperCase()}
           </div>
@@ -68,29 +114,42 @@ export default function Header({ activePage, onNavigate }) {
       </div>
 
       {/* ── Right: streak + clock + avatar ── */}
-      <div className="flex items-center gap-5">
+      <div className="flex items-center" style={{ gap: 18 }}>
 
-        {/* Streak pill */}
-        <div
-          className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg"
-          style={{
-            background: 'rgba(239,115,22,0.1)',
-            border: '1px solid rgba(239,115,22,0.2)',
-          }}
-        >
-          <Flame size={13} style={{ color: '#f97316' }} />
+        {/* Streak — flame icon + number, energetic */}
+        <div className="hidden md:flex items-center" style={{ gap: 6 }}>
+          <Flame
+            size={15}
+            style={{
+              color: '#f97316',
+              fontSize: '3.0rem',
+              filter: 'drop-shadow(0 0 5px rgba(249,115,22,0.5))',
+            }}
+          />
           <span
-            className="font-mono font-bold"
-            style={{ color: '#fb923c', fontSize: '0.68rem', letterSpacing: '0.1em' }}
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontWeight: 700,
+              fontSize: '1.2rem',
+              color: '#fb923c',
+              textShadow: '0 0 10px rgba(249,115,22,0.3)',
+              letterSpacing: '0.04em',
+            }}
           >
-            {user.streak}-DAY STREAK
+            {user.streak}
           </span>
         </div>
 
         {/* Clock */}
         <div
-          className="hidden md:block font-mono font-bold tabular-nums"
-          style={{ color: '#3d4168', fontSize: '0.72rem', letterSpacing: '0.12em' }}
+          className="hidden md:block tabular-nums"
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontWeight: 600,
+            color: '#3d4168',
+            fontSize: '0.66rem',
+            letterSpacing: '0.1em',
+          }}
         >
           {timeStr}
         </div>
@@ -98,116 +157,172 @@ export default function Header({ activePage, onNavigate }) {
         {/* Divider */}
         <div
           className="hidden md:block"
-          style={{ width: '1px', height: '20px', background: 'rgba(124,58,237,0.15)' }}
+          style={{
+            width: 1,
+            height: 18,
+            background: 'rgba(124,58,237,0.12)',
+          }}
         />
 
-        {/* Avatar + profile card */}
+        {/* ── Avatar + profile hover card ── */}
         <div
           className="relative"
-          onMouseEnter={() => setProfileHovered(true)}
-          onMouseLeave={() => setProfileHovered(false)}
+          onMouseEnter={showProfile}
+          onMouseLeave={hideProfile}
         >
           {/* Avatar button */}
           <button
-            onClick={() => onNavigate('profile')}
-            className="flex items-center justify-center rounded-full font-bold transition-all"
+            className="flex items-center justify-center rounded-full"
             style={{
-              width: 34,
-              height: 34,
+              width: 33,
+              height: 33,
               background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
               color: 'white',
-              fontFamily: 'Orbitron, sans-serif',
-              fontSize: '0.62rem',
-              border: profileHovered
-                ? '2px solid rgba(139,92,246,0.7)'
-                : '2px solid rgba(124,58,237,0.25)',
-              boxShadow: profileHovered ? '0 0 14px rgba(124,58,237,0.5)' : 'none',
+              fontFamily: "'Orbitron', monospace",
+              fontSize: '0.58rem',
+              fontWeight: 700,
+              border: profileVisible
+                ? '2px solid rgba(139,92,246,0.65)'
+                : '2px solid rgba(124,58,237,0.2)',
+              boxShadow: profileVisible
+                ? '0 0 14px rgba(124,58,237,0.45)'
+                : '0 0 0 rgba(0,0,0,0)',
               cursor: 'pointer',
-              transition: 'all 0.25s ease',
+              transition: 'all 0.25s cubic-bezier(0.23,1,0.32,1)',
+              outline: 'none',
+              letterSpacing: '0.03em',
             }}
           >
-            {(user.name || 'AS').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+            {initials}
           </button>
 
           {/* Profile hover card */}
-          {profileHovered && (
+          {profileVisible && (
             <div
-              className="absolute right-0 top-full mt-3 rounded-2xl overflow-hidden"
+              className="absolute right-0 top-full overflow-hidden"
               style={{
-                width: 240,
+                marginTop: 10,
+                width: 236,
+                borderRadius: 12,
                 background: 'rgba(11,13,22,0.98)',
-                border: '1px solid rgba(124,58,237,0.2)',
-                boxShadow: '0 20px 48px rgba(0,0,0,0.7), 0 0 30px rgba(124,58,237,0.08)',
-                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(124,58,237,0.15)',
+                boxShadow:
+                  '0 16px 48px rgba(0,0,0,0.65), 0 0 24px rgba(124,58,237,0.06)',
+                backdropFilter: 'blur(20px)',
                 zIndex: 60,
-                animation: 'slideDownFade 0.2s ease',
+                animation: 'hdr-slideDown 0.2s cubic-bezier(0.16,1,0.3,1)',
               }}
             >
-              <style>{`
-                @keyframes slideDownFade {
-                  from { opacity: 0; transform: translateY(-6px); }
-                  to   { opacity: 1; transform: translateY(0); }
-                }
-              `}</style>
+              {/* Ambient glow */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 80,
+                  height: 80,
+                  background:
+                    'radial-gradient(circle at top right, rgba(124,58,237,0.1), transparent 70%)',
+                  pointerEvents: 'none',
+                }}
+              />
 
               {/* Header band */}
               <div
-                className="px-5 py-4 flex items-center gap-3"
+                className="flex items-center"
                 style={{
-                  borderBottom: '1px solid rgba(124,58,237,0.1)',
-                  background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.05))',
+                  gap: 11,
+                  padding: '14px 16px',
+                  borderBottom: '1px solid rgba(124,58,237,0.08)',
+                  background:
+                    'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.04))',
                 }}
               >
                 <div
-                  className="flex items-center justify-center rounded-full font-bold shrink-0"
+                  className="flex items-center justify-center rounded-full shrink-0"
                   style={{
-                    width: 36,
-                    height: 36,
+                    width: 34,
+                    height: 34,
                     background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
                     color: 'white',
-                    fontFamily: 'Orbitron, sans-serif',
-                    fontSize: '0.65rem',
-                    border: '1px solid rgba(124,58,237,0.35)',
+                    fontFamily: "'Orbitron', monospace",
+                    fontSize: '0.6rem',
+                    fontWeight: 700,
+                    border: '1px solid rgba(139,92,246,0.3)',
                   }}
                 >
-                  {(user.name || 'AS').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                  {initials}
                 </div>
                 <div>
-                  <div className="font-bold text-sm" style={{ color: '#e8eaff', letterSpacing: '0.02em' }}>
+                  <div
+                    style={{
+                      color: '#e8eaff',
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '0.82rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.01em',
+                    }}
+                  >
                     {user.name}
                   </div>
-                  <div className="font-mono flex items-center gap-1 mt-0.5" style={{ color: '#f97316', fontSize: '0.6rem', letterSpacing: '0.08em' }}>
-                    <Flame size={10} />
+                  <div
+                    className="flex items-center"
+                    style={{
+                      gap: 4,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: '#f97316',
+                      fontSize: '0.56rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.06em',
+                      marginTop: 2,
+                    }}
+                  >
+                    <Flame size={9} />
                     {user.streak}-DAY STREAK
                   </div>
                 </div>
               </div>
 
               {/* Stats grid */}
-              <div className="grid grid-cols-2 gap-px p-4 gap-3">
+              <div
+                className="grid grid-cols-2"
+                style={{ padding: 12, gap: 8 }}
+              >
                 {[
-                  { label: 'AGE',    value: user.age ? `${user.age} yrs` : '—' },
+                  { label: 'AGE', value: user.age ? `${user.age} yrs` : '—' },
                   { label: 'HEIGHT', value: user.height ? `${user.height} cm` : '—' },
                   { label: 'WEIGHT', value: user.weight ? `${user.weight} kg` : '—' },
-                  { label: 'BMI',    value: bmi },
-                ].map(item => (
+                  { label: 'BMI', value: bmi },
+                ].map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-lg px-3 py-2.5"
+                    className="hdr-stat-tile"
                     style={{
-                      background: 'rgba(124,58,237,0.06)',
-                      border: '1px solid rgba(124,58,237,0.1)',
+                      borderRadius: 8,
+                      padding: '8px 10px',
+                      background: 'rgba(124,58,237,0.05)',
+                      border: '1px solid rgba(124,58,237,0.08)',
                     }}
                   >
                     <div
-                      className="font-mono font-bold mb-1"
-                      style={{ color: '#3d4168', fontSize: '0.55rem', letterSpacing: '0.14em' }}
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: '#4a4f72',
+                        fontSize: '0.5rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.12em',
+                        marginBottom: 4,
+                      }}
                     >
                       {item.label}
                     </div>
                     <div
-                      className="font-mono font-bold"
-                      style={{ color: '#c4b5fd', fontSize: '0.78rem' }}
+                      style={{
+                        fontFamily: "'Orbitron', monospace",
+                        color: '#c4b5fd',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                      }}
                     >
                       {item.value}
                     </div>
@@ -215,25 +330,36 @@ export default function Header({ activePage, onNavigate }) {
                 ))}
               </div>
 
-              {/* View profile link */}
-              <div className="px-4 pb-4">
+              {/* View profile button */}
+              <div style={{ padding: '0 12px 12px' }}>
                 <button
-                  onClick={() => onNavigate('profile')}
-                  className="w-full py-2 rounded-lg font-mono font-bold text-xs tracking-widest transition-colors"
+                  onClick={() => {
+                    setProfileVisible(false);
+                    onNavigate('profile');
+                  }}
+                  className="w-full"
                   style={{
-                    background: 'rgba(124,58,237,0.1)',
-                    border: '1px solid rgba(124,58,237,0.22)',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '0.62rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.1em',
+                    padding: '8px 0',
+                    borderRadius: 8,
+                    background: 'rgba(124,58,237,0.08)',
+                    border: '1px solid rgba(124,58,237,0.18)',
                     color: '#a78bfa',
                     cursor: 'pointer',
-                    letterSpacing: '0.1em',
+                    transition: 'all 0.2s ease',
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = 'rgba(124,58,237,0.2)';
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(124,58,237,0.16)';
                     e.currentTarget.style.color = '#c4b5fd';
+                    e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)';
                   }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(124,58,237,0.08)';
                     e.currentTarget.style.color = '#a78bfa';
+                    e.currentTarget.style.borderColor = 'rgba(124,58,237,0.18)';
                   }}
                 >
                   VIEW PROFILE →
