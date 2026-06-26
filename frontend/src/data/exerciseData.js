@@ -8,7 +8,7 @@ const exercises = [
     difficulty: 'Intermediate',
     equipment: 'Barbell',
     description: 'Compound press that builds chest, shoulders, and triceps.',
-    gifUrl: null, // replace with real GIF URL if available
+    gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0025.gif', // Barbell Bench Press
     youtubeLink: 'https://www.youtube.com/watch?v=rT7DgCr-3pg',
     musclesWorked: ['Pectoralis Major', 'Anterior Deltoid', 'Triceps Brachii'],
     instructions: [
@@ -37,7 +37,7 @@ const exercises = [
     difficulty: 'Intermediate',
     equipment: 'Barbell',
     description: 'Foundational lower-body exercise for strength and mass.',
-    gifUrl: null,
+    gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/1461.gif', // Barbell Full Squat
     youtubeLink: 'https://www.youtube.com/watch?v=U3HlEF_E9fo',
     musclesWorked: ['Quadriceps', 'Hamstrings', 'Glutes', 'Core'],
     instructions: [
@@ -66,7 +66,7 @@ const exercises = [
     difficulty: 'Advanced',
     equipment: 'Barbell',
     description: 'Full-body pull that targets the posterior chain.',
-    gifUrl: null,
+    gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0032.gif', // Barbell Deadlift
     youtubeLink: 'https://www.youtube.com/watch?v=1ZXobu7JvvE',
     musclesWorked: ['Hamstrings', 'Glutes', 'Lower Back', 'Traps'],
     instructions: [
@@ -95,7 +95,7 @@ const exercises = [
     difficulty: 'Intermediate',
     equipment: 'Pull-Up Bar',
     description: 'Upper-body bodyweight exercise for back and biceps.',
-    gifUrl: null,
+    gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0005.gif', // Pull-Up
     youtubeLink: 'https://www.youtube.com/watch?v=eGo4IYlbE5g',
     musclesWorked: ['Lats', 'Biceps', 'Rear Delts'],
     instructions: [
@@ -124,7 +124,7 @@ const exercises = [
     difficulty: 'Beginner',
     equipment: 'Dumbbells',
     description: 'Isolation exercise for the biceps.',
-    gifUrl: null,
+    gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0306.gif', // Dumbbell Bicep Curl
     youtubeLink: 'https://www.youtube.com/watch?v=ykJmrZ5v0Oo',
     musclesWorked: ['Biceps Brachii', 'Brachialis'],
     instructions: [
@@ -144,7 +144,94 @@ const exercises = [
       'Partial reps.',
       'Elbows drifting forward.'
     ]
-  }
+  },
+  {
+  id: 6,
+  name: 'Shoulder Press',
+  muscleGroup: 'Shoulders',
+  type: 'Strength',
+  difficulty: 'Intermediate',
+  equipment: 'Dumbbells',
+  description: 'Compound shoulder exercise for building strength and size.',
+  gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0405.gif', // Dumbbell Seated Shoulder Press
+  youtubeLink: 'https://www.youtube.com/watch?v=qEwKCR5JCog',
+  musclesWorked: ['Anterior Deltoid', 'Lateral Deltoid', 'Triceps'],
+  instructions: [
+    'Sit or stand holding dumbbells at shoulder height.',
+    'Brace your core and keep your back neutral.',
+    'Press the dumbbells overhead until arms are extended.',
+    'Lower under control back to shoulder level.',
+    'Repeat for desired reps.'
+  ],
+  formTips: [
+    'Avoid arching your lower back.',
+    'Keep wrists stacked over elbows.',
+    'Control the lowering phase.'
+  ],
+  commonMistakes: [
+    'Using excessive momentum.',
+    'Locking elbows aggressively.',
+    'Shrugging shoulders during the press.'
+  ]
+},
+{
+  id: 7,
+  name: 'Lat Pulldown',
+  muscleGroup: 'Back',
+  type: 'Strength',
+  difficulty: 'Beginner',
+  equipment: 'Cable Machine',
+  description: 'Machine exercise for developing the lats and upper back.',
+  gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0177.gif', // Cable Lat Pulldown
+  youtubeLink: 'https://www.youtube.com/watch?v=CAwf7n6Luuc',
+  musclesWorked: ['Latissimus Dorsi', 'Biceps', 'Rhomboids'],
+  instructions: [
+    'Grip the bar slightly wider than shoulder width.',
+    'Sit with thighs secured beneath the pads.',
+    'Pull the bar to your upper chest.',
+    'Squeeze your shoulder blades together.',
+    'Slowly return to the starting position.'
+  ],
+  formTips: [
+    'Lead with your elbows.',
+    'Keep your chest up.',
+    'Control the eccentric movement.'
+  ],
+  commonMistakes: [
+    'Pulling the bar behind the neck.',
+    'Swinging your body.',
+    'Using too much weight.'
+  ]
+},
+{
+  id: 8,
+  name: 'Plank',
+  muscleGroup: 'Core',
+  type: 'Bodyweight',
+  difficulty: 'Beginner',
+  equipment: 'None',
+  description: 'Core stability exercise that strengthens the entire midsection.',
+  gifUrl: 'https://d205bpvrqc9yn1.cloudfront.net/0722.gif', // Plank
+  youtubeLink: 'https://www.youtube.com/watch?v=pSHjTRCQxIw',
+  musclesWorked: ['Rectus Abdominis', 'Obliques', 'Lower Back'],
+  instructions: [
+    'Place forearms on the floor.',
+    'Extend your legs behind you.',
+    'Keep your body in a straight line.',
+    'Brace your core and glutes.',
+    'Hold for the target duration.'
+  ],
+  formTips: [
+    'Do not let your hips sag.',
+    'Keep your neck neutral.',
+    'Breathe normally.'
+  ],
+  commonMistakes: [
+    'Raising the hips too high.',
+    'Holding your breath.',
+    'Letting the lower back arch.'
+  ]
+}
 ];
 
 export { exercises };
