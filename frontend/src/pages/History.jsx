@@ -8,9 +8,9 @@ function WorkoutCard({ workout, expanded, onToggle }) {
     <div
       className="rounded-lg overflow-hidden transition-cyber mb-3"
       style={{
-        background: 'rgba(13,15,26,0.8)',
-        border: expanded ? '1px solid rgba(124,58,237,0.3)' : '1px solid rgba(124,58,237,0.12)',
-        boxShadow: expanded ? '0 0 20px rgba(124,58,237,0.08)' : 'none',
+        background: 'rgba(var(--bg-surface-rgb),0.8)',
+        border: expanded ? '1px solid rgba(var(--accent-violet-rgb),0.3)' : '1px solid rgba(var(--accent-violet-rgb),0.12)',
+        boxShadow: expanded ? '0 0 20px rgba(var(--accent-violet-rgb),0.08)' : 'none',
       }}
     >
       {/* Card header */}
@@ -25,17 +25,17 @@ function WorkoutCard({ workout, expanded, onToggle }) {
           style={{
             width: 48, height: 48,
             background: workout.formScore >= 90
-              ? 'rgba(16,185,129,0.1)'
+              ? 'rgba(var(--accent-green-rgb),0.1)'
               : workout.formScore >= 75
-              ? 'rgba(6,182,212,0.1)'
-              : 'rgba(245,158,11,0.1)',
+              ? 'rgba(var(--accent-cyan-rgb),0.1)'
+              : 'rgba(var(--accent-amber-rgb),0.1)',
             border: `1px solid ${
-              workout.formScore >= 90 ? 'rgba(16,185,129,0.25)' : workout.formScore >= 75 ? 'rgba(6,182,212,0.25)' : 'rgba(245,158,11,0.25)'
+              workout.formScore >= 90 ? 'rgba(var(--accent-green-rgb),0.25)' : workout.formScore >= 75 ? 'rgba(var(--accent-cyan-rgb),0.25)' : 'rgba(var(--accent-amber-rgb),0.25)'
             }`,
           }}
         >
           <div className="font-display font-bold text-center" style={{
-            color: workout.formScore >= 90 ? '#10b981' : workout.formScore >= 75 ? '#06b6d4' : '#f59e0b',
+            color: workout.formScore >= 90 ?  'var(--accent-green)'  : workout.formScore >= 75 ?  'var(--accent-cyan)'  :  'var(--accent-amber)' ,
             fontSize: '1rem',
             lineHeight: 1,
           }}>
@@ -46,16 +46,16 @@ function WorkoutCard({ workout, expanded, onToggle }) {
         <div className="flex-1 min-w-0">
           <div
             className="font-display font-bold mb-1"
-            style={{ color: '#e8eaff', fontSize: '0.82rem', letterSpacing: '0.05em' }}
+            style={{ color:  'var(--text-primary)' , fontSize: '0.82rem', letterSpacing: '0.05em' }}
           >
             {workout.name.toUpperCase()}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.6rem' }}>
+            <span className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.6rem' }}>
               {workout.date}
             </span>
-            <span style={{ color: '#4a4f72' }}>·</span>
-            <span className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.6rem' }}>
+            <span style={{ color:  'var(--text-dim)'  }}>·</span>
+            <span className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.6rem' }}>
               {workout.duration}
             </span>
           </div>
@@ -64,16 +64,16 @@ function WorkoutCard({ workout, expanded, onToggle }) {
         {/* Quick stats */}
         <div className="hidden md:flex items-center gap-5 mr-2">
           <div className="text-center">
-            <div className="font-display font-semibold" style={{ color: '#8b5cf6', fontSize: '0.9rem' }}>
+            <div className="font-display font-semibold" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.9rem' }}>
               {workout.reps}
             </div>
-            <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.55rem' }}>REPS</div>
+            <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.55rem' }}>REPS</div>
           </div>
           <div className="text-center">
-            <div className="font-display font-semibold" style={{ color: '#f59e0b', fontSize: '0.9rem' }}>
+            <div className="font-display font-semibold" style={{ color:  'var(--accent-amber)' , fontSize: '0.9rem' }}>
               {workout.calories}
             </div>
-            <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.55rem' }}>KCAL</div>
+            <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.55rem' }}>KCAL</div>
           </div>
         </div>
 
@@ -83,8 +83,8 @@ function WorkoutCard({ workout, expanded, onToggle }) {
         </div>
 
         {expanded
-          ? <ChevronUp size={14} style={{ color: '#8b90b8', flexShrink: 0 }} />
-          : <ChevronDown size={14} style={{ color: '#8b90b8', flexShrink: 0 }} />
+          ? <ChevronUp size={14} style={{ color:  'var(--text-secondary)' , flexShrink: 0 }} />
+          : <ChevronDown size={14} style={{ color:  'var(--text-secondary)' , flexShrink: 0 }} />
         }
       </button>
 
@@ -92,13 +92,13 @@ function WorkoutCard({ workout, expanded, onToggle }) {
       {expanded && (
         <div
           className="px-4 pb-4 animate-slide-up"
-          style={{ borderTop: '1px solid rgba(124,58,237,0.08)' }}
+          style={{ borderTop: '1px solid rgba(var(--accent-violet-rgb),0.08)' }}
         >
           <div className="pt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
 
             {/* Exercises */}
             <div className="col-span-2">
-              <div className="font-mono-code mb-2" style={{ color: '#4a4f72', fontSize: '0.6rem' }}>
+              <div className="font-mono-code mb-2" style={{ color:  'var(--text-dim)' , fontSize: '0.6rem' }}>
                 EXERCISES PERFORMED
               </div>
               <div className="flex flex-col gap-1.5">
@@ -106,13 +106,13 @@ function WorkoutCard({ workout, expanded, onToggle }) {
                   <div
                     key={i}
                     className="flex items-center gap-2 rounded px-3 py-2"
-                    style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.08)' }}
+                    style={{ background: 'rgba(var(--accent-violet-rgb),0.06)', border: '1px solid rgba(var(--accent-violet-rgb),0.08)' }}
                   >
                     <div
                       className="rounded-full"
-                      style={{ width: 4, height: 4, background: '#8b5cf6', boxShadow: '0 0 4px #8b5cf6' }}
+                      style={{ width: 4, height: 4, background:  'var(--accent-violet-bright)' , boxShadow: '0 0 4px #8b5cf6' }}
                     />
-                    <span className="text-sm" style={{ color: '#e8eaff' }}>{ex}</span>
+                    <span className="text-sm" style={{ color:  'var(--text-primary)'  }}>{ex}</span>
                   </div>
                 ))}
               </div>
@@ -120,22 +120,22 @@ function WorkoutCard({ workout, expanded, onToggle }) {
 
             {/* Stats */}
             <div className="col-span-2">
-              <div className="font-mono-code mb-2" style={{ color: '#4a4f72', fontSize: '0.6rem' }}>
+              <div className="font-mono-code mb-2" style={{ color:  'var(--text-dim)' , fontSize: '0.6rem' }}>
                 SESSION STATS
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { label: 'Duration', value: workout.duration, color: '#06b6d4' },
-                  { label: 'Total Reps', value: workout.reps, color: '#8b5cf6' },
-                  { label: 'Calories', value: `${workout.calories} kcal`, color: '#f59e0b' },
-                  { label: 'Form Score', value: `${workout.formScore}/100`, color: workout.formScore >= 90 ? '#10b981' : '#06b6d4' },
+                  { label: 'Duration', value: workout.duration, color:  'var(--accent-cyan)'  },
+                  { label: 'Total Reps', value: workout.reps, color:  'var(--accent-violet-bright)'  },
+                  { label: 'Calories', value: `${workout.calories} kcal`, color:  'var(--accent-amber)'  },
+                  { label: 'Form Score', value: `${workout.formScore}/100`, color: workout.formScore >= 90 ?  'var(--accent-green)'  :  'var(--accent-cyan)'  },
                 ].map(stat => (
                   <div
                     key={stat.label}
                     className="rounded p-3"
-                    style={{ background: 'rgba(13,15,26,0.6)', border: '1px solid rgba(124,58,237,0.08)' }}
+                    style={{ background: 'rgba(var(--bg-surface-rgb),0.6)', border: '1px solid rgba(var(--accent-violet-rgb),0.08)' }}
                   >
-                    <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.55rem' }}>
+                    <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.55rem' }}>
                       {stat.label.toUpperCase()}
                     </div>
                     <div className="font-display font-bold mt-0.5" style={{ color: stat.color, fontSize: '0.9rem' }}>
@@ -151,11 +151,11 @@ function WorkoutCard({ workout, expanded, onToggle }) {
           <div
             className="mt-4 rounded p-3"
             style={{
-              background: 'linear-gradient(135deg, rgba(124,58,237,0.06), rgba(6,182,212,0.04))',
-              border: '1px solid rgba(124,58,237,0.12)',
+              background: 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.06), rgba(var(--accent-cyan-rgb),0.04))',
+              border: '1px solid rgba(var(--accent-violet-rgb),0.12)',
             }}
           >
-            <div className="font-mono-code mb-1.5" style={{ color: '#8b5cf6', fontSize: '0.58rem' }}>
+            <div className="font-mono-code mb-1.5" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.58rem' }}>
               AI FORM ANALYSIS
             </div>
             <p className="text-xs" style={{ color: '#c4c8e8', lineHeight: 1.6 }}>
@@ -192,10 +192,10 @@ export default function History() {
 
         <div className="mb-6">
           <div className="chip mb-2">· SESSION LOG</div>
-          <h1 className="font-display font-bold mb-1" style={{ color: '#e8eaff', fontSize: '1.3rem', letterSpacing: '0.08em' }}>
+          <h1 className="font-display font-bold mb-1" style={{ color:  'var(--text-primary)' , fontSize: '1.3rem', letterSpacing: '0.08em' }}>
             WORKOUT HISTORY
           </h1>
-          <p className="text-sm" style={{ color: '#8b90b8' }}>
+          <p className="text-sm" style={{ color:  'var(--text-secondary)'  }}>
             Completed sessions · form scores · progress over time
           </p>
         </div>
@@ -203,20 +203,20 @@ export default function History() {
         {/* Summary stats */}
         <div className="grid grid-cols-4 gap-4 mb-6">
           {[
-            { label: 'Total Sessions', value: workoutHistory.length, color: '#8b5cf6', unit: '' },
-            { label: 'Total Reps', value: totalReps.toLocaleString(), color: '#06b6d4', unit: '' },
-            { label: 'Calories Burned', value: totalCalories.toLocaleString(), color: '#f59e0b', unit: 'kcal' },
-            { label: 'Avg Form Score', value: avgForm, color: '#10b981', unit: '/100' },
+            { label: 'Total Sessions', value: workoutHistory.length, color:  'var(--accent-violet-bright)' , unit: '' },
+            { label: 'Total Reps', value: totalReps.toLocaleString(), color:  'var(--accent-cyan)' , unit: '' },
+            { label: 'Calories Burned', value: totalCalories.toLocaleString(), color:  'var(--accent-amber)' , unit: 'kcal' },
+            { label: 'Avg Form Score', value: avgForm, color:  'var(--accent-green)' , unit: '/100' },
           ].map(stat => (
             <div
               key={stat.label}
               className="rounded-lg p-4"
               style={{
-                background: 'rgba(13,15,26,0.8)',
-                border: `1px solid ${stat.color}20`,
+                background: 'rgba(var(--bg-surface-rgb),0.8)',
+                border: `1px solid ${window.themeColor(stat.color, 0.2)}`,
               }}
             >
-              <div className="font-mono-code mb-1" style={{ color: '#4a4f72', fontSize: '0.58rem' }}>
+              <div className="font-mono-code mb-1" style={{ color:  'var(--text-dim)' , fontSize: '0.58rem' }}>
                 {stat.label.toUpperCase()}
               </div>
               <div className="flex items-baseline gap-1">
@@ -231,7 +231,7 @@ export default function History() {
               </div>
               <div
                 className="mt-2 rounded-full"
-                style={{ height: 3, background: `${stat.color}15` }}
+                style={{ height: 3, background: `${window.themeColor(stat.color, 0.15)}` }}
               >
                 <div
                   className="rounded-full h-full"
@@ -250,16 +250,16 @@ export default function History() {
               onClick={() => setFilter(tag)}
               className="rounded px-3 py-1.5 text-xs transition-cyber"
               style={filter === tag ? {
-                background: 'rgba(124,58,237,0.2)',
-                border: '1px solid rgba(124,58,237,0.4)',
-                color: '#e8eaff',
+                background: 'rgba(var(--accent-violet-rgb),0.2)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.4)',
+                color:  'var(--text-primary)' ,
                 fontFamily: 'Orbitron',
                 fontSize: '0.65rem',
                 letterSpacing: '0.06em',
               } : {
-                background: 'rgba(124,58,237,0.05)',
-                border: '1px solid rgba(124,58,237,0.1)',
-                color: '#8b90b8',
+                background: 'rgba(var(--accent-violet-rgb),0.05)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.1)',
+                color:  'var(--text-secondary)' ,
                 fontFamily: 'Inter',
               }}
             >
@@ -273,12 +273,12 @@ export default function History() {
           {filtered.length === 0 ? (
             <div
               className="rounded-lg p-10 text-center"
-              style={{ border: '1px dashed rgba(124,58,237,0.15)' }}
+              style={{ border: '1px dashed rgba(var(--accent-violet-rgb),0.15)' }}
             >
-              <div className="font-display font-bold mb-1" style={{ color: '#4a4f72', fontSize: '0.8rem' }}>
+              <div className="font-display font-bold mb-1" style={{ color:  'var(--text-dim)' , fontSize: '0.8rem' }}>
                 NO SESSIONS FOUND
               </div>
-              <p className="text-sm" style={{ color: '#4a4f72' }}>
+              <p className="text-sm" style={{ color:  'var(--text-dim)'  }}>
                 No workouts match this filter yet.
               </p>
             </div>

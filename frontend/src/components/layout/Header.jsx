@@ -16,8 +16,8 @@ if (typeof document !== 'undefined' && !document.getElementById(ANIM_ID)) {
       transition: border-color 0.2s ease, background 0.2s ease;
     }
     .hdr-stat-tile:hover {
-      border-color: rgba(139,92,246,0.2) !important;
-      background: rgba(124,58,237,0.09) !important;
+      border-color: rgba(var(--accent-violet-bright-rgb),0.2) !important;
+      background: rgba(var(--accent-violet-rgb),0.09) !important;
     }
   `;
   document.head.appendChild(style);
@@ -79,8 +79,8 @@ export default function Header({ activePage, onNavigate }) {
         left: 'var(--sidebar-width)',
         height: 'var(--header-height)',
         padding: '0 28px',
-        background: 'rgba(8,9,15,0.92)',
-        borderBottom: '1px solid rgba(124,58,237,0.08)',
+        background: 'rgba(var(--bg-base-rgb),0.92)',
+        borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.08)',
         backdropFilter: 'blur(16px)',
       }}
     >
@@ -89,7 +89,7 @@ export default function Header({ activePage, onNavigate }) {
         <div>
           <div
             style={{
-              color: '#e8eaff',
+              color:  'var(--text-primary)' ,
               fontSize: '0.78rem',
               letterSpacing: '0.14em',
               fontFamily: "'Orbitron', monospace",
@@ -100,7 +100,7 @@ export default function Header({ activePage, onNavigate }) {
           </div>
           <div
             style={{
-              color: '#3d4168',
+              color:  'var(--text-dim)' ,
               fontSize: '0.58rem',
               marginTop: 2,
               letterSpacing: '0.08em',
@@ -146,7 +146,7 @@ export default function Header({ activePage, onNavigate }) {
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 600,
-            color: '#3d4168',
+            color:  'var(--text-dim)' ,
             fontSize: '0.66rem',
             letterSpacing: '0.1em',
           }}
@@ -160,7 +160,7 @@ export default function Header({ activePage, onNavigate }) {
           style={{
             width: 1,
             height: 18,
-            background: 'rgba(124,58,237,0.12)',
+            background: 'rgba(var(--accent-violet-rgb),0.12)',
           }}
         />
 
@@ -182,10 +182,10 @@ export default function Header({ activePage, onNavigate }) {
               fontSize: '0.58rem',
               fontWeight: 700,
               border: profileVisible
-                ? '2px solid rgba(139,92,246,0.65)'
-                : '2px solid rgba(124,58,237,0.2)',
+                ? '2px solid rgba(var(--accent-violet-bright-rgb),0.65)'
+                : '2px solid rgba(var(--accent-violet-rgb),0.2)',
               boxShadow: profileVisible
-                ? '0 0 14px rgba(124,58,237,0.45)'
+                ? '0 0 14px rgba(var(--accent-violet-rgb),0.45)'
                 : '0 0 0 rgba(0,0,0,0)',
               cursor: 'pointer',
               transition: 'all 0.25s cubic-bezier(0.23,1,0.32,1)',
@@ -204,10 +204,10 @@ export default function Header({ activePage, onNavigate }) {
                 marginTop: 10,
                 width: 236,
                 borderRadius: 12,
-                background: 'rgba(11,13,22,0.98)',
-                border: '1px solid rgba(124,58,237,0.15)',
+                background: 'rgba(var(--bg-card-rgb),0.98)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
                 boxShadow:
-                  '0 16px 48px rgba(0,0,0,0.65), 0 0 24px rgba(124,58,237,0.06)',
+                  '0 16px 48px rgba(0,0,0,0.65), 0 0 24px rgba(var(--accent-violet-rgb),0.06)',
                 backdropFilter: 'blur(20px)',
                 zIndex: 60,
                 animation: 'hdr-slideDown 0.2s cubic-bezier(0.16,1,0.3,1)',
@@ -222,7 +222,7 @@ export default function Header({ activePage, onNavigate }) {
                   width: 80,
                   height: 80,
                   background:
-                    'radial-gradient(circle at top right, rgba(124,58,237,0.1), transparent 70%)',
+                    'radial-gradient(circle at top right, rgba(var(--accent-violet-rgb),0.1), transparent 70%)',
                   pointerEvents: 'none',
                 }}
               />
@@ -233,9 +233,9 @@ export default function Header({ activePage, onNavigate }) {
                 style={{
                   gap: 11,
                   padding: '14px 16px',
-                  borderBottom: '1px solid rgba(124,58,237,0.08)',
+                  borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                   background:
-                    'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.04))',
+                    'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.08), rgba(var(--accent-cyan-rgb),0.04))',
                 }}
               >
                 <div
@@ -248,7 +248,7 @@ export default function Header({ activePage, onNavigate }) {
                     fontFamily: "'Orbitron', monospace",
                     fontSize: '0.6rem',
                     fontWeight: 700,
-                    border: '1px solid rgba(139,92,246,0.3)',
+                    border: '1px solid rgba(var(--accent-violet-bright-rgb),0.3)',
                   }}
                 >
                   {initials}
@@ -256,7 +256,7 @@ export default function Header({ activePage, onNavigate }) {
                 <div>
                   <div
                     style={{
-                      color: '#e8eaff',
+                      color:  'var(--text-primary)' ,
                       fontFamily: "'Inter', sans-serif",
                       fontSize: '0.82rem',
                       fontWeight: 600,
@@ -300,14 +300,14 @@ export default function Header({ activePage, onNavigate }) {
                     style={{
                       borderRadius: 8,
                       padding: '8px 10px',
-                      background: 'rgba(124,58,237,0.05)',
-                      border: '1px solid rgba(124,58,237,0.08)',
+                      background: 'rgba(var(--accent-violet-rgb),0.05)',
+                      border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                     }}
                   >
                     <div
                       style={{
                         fontFamily: "'JetBrains Mono', monospace",
-                        color: '#4a4f72',
+                        color:  'var(--text-dim)' ,
                         fontSize: '0.5rem',
                         fontWeight: 700,
                         letterSpacing: '0.12em',
@@ -345,21 +345,21 @@ export default function Header({ activePage, onNavigate }) {
                     letterSpacing: '0.1em',
                     padding: '8px 0',
                     borderRadius: 8,
-                    background: 'rgba(124,58,237,0.08)',
-                    border: '1px solid rgba(124,58,237,0.18)',
+                    background: 'rgba(var(--accent-violet-rgb),0.08)',
+                    border: '1px solid rgba(var(--accent-violet-rgb),0.18)',
                     color: '#a78bfa',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(124,58,237,0.16)';
+                    e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.16)';
                     e.currentTarget.style.color = '#c4b5fd';
-                    e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-bright-rgb),0.3)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(124,58,237,0.08)';
+                    e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.08)';
                     e.currentTarget.style.color = '#a78bfa';
-                    e.currentTarget.style.borderColor = 'rgba(124,58,237,0.18)';
+                    e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.18)';
                   }}
                 >
                   VIEW PROFILE →

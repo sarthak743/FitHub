@@ -5,9 +5,9 @@ import { exercises } from '../data/mockData.js';
 
 function ExerciseCard({ exercise, onSelect, selected }) {
   const diffColor = {
-    Beginner: '#10b981',
-    Intermediate: '#f59e0b',
-    Advanced: '#ec4899',
+    Beginner:  'var(--accent-green)' ,
+    Intermediate:  'var(--accent-amber)' ,
+    Advanced:  'var(--accent-pink)' ,
   }[exercise.difficulty];
 
   return (
@@ -15,25 +15,25 @@ function ExerciseCard({ exercise, onSelect, selected }) {
       onClick={() => onSelect(exercise)}
       className="rounded-lg p-4 text-left transition-cyber w-full"
       style={{
-        background: selected ? 'rgba(124,58,237,0.12)' : 'rgba(13,15,26,0.8)',
+        background: selected ? 'rgba(var(--accent-violet-rgb),0.12)' : 'rgba(var(--bg-surface-rgb),0.8)',
         border: selected
-          ? '1px solid rgba(139,92,246,0.4)'
-          : '1px solid rgba(124,58,237,0.12)',
-        boxShadow: selected ? '0 0 16px rgba(124,58,237,0.15)' : 'none',
+          ? '1px solid rgba(var(--accent-violet-bright-rgb),0.4)'
+          : '1px solid rgba(var(--accent-violet-rgb),0.12)',
+        boxShadow: selected ? '0 0 16px rgba(var(--accent-violet-rgb),0.15)' : 'none',
       }}
     >
       <div className="flex items-start justify-between mb-2">
         <div
           className="font-display font-bold"
-          style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.05em' }}
+          style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.05em' }}
         >
           {exercise.name.toUpperCase()}
         </div>
         <span
           className="text-xs rounded px-1.5 py-0.5"
           style={{
-            background: `${diffColor}15`,
-            border: `1px solid ${diffColor}30`,
+            background: `${window.themeColor(diffColor, 0.15)}`,
+            border: `1px solid ${window.themeColor(diffColor, 0.3)}`,
             color: diffColor,
             fontFamily: 'JetBrains Mono',
             fontSize: '0.58rem',
@@ -42,17 +42,17 @@ function ExerciseCard({ exercise, onSelect, selected }) {
           {exercise.difficulty.toUpperCase()}
         </span>
       </div>
-      <div className="text-xs mb-3" style={{ color: '#8b90b8' }}>{exercise.muscle}</div>
+      <div className="text-xs mb-3" style={{ color:  'var(--text-secondary)'  }}>{exercise.muscle}</div>
       <div className="flex items-center gap-3">
         <div>
-          <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.55rem' }}>SETS</div>
-          <div className="font-display font-bold" style={{ color: '#8b5cf6', fontSize: '0.9rem' }}>{exercise.sets}</div>
+          <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.55rem' }}>SETS</div>
+          <div className="font-display font-bold" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.9rem' }}>{exercise.sets}</div>
         </div>
         <div>
-          <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.55rem' }}>
+          <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.55rem' }}>
             {exercise.unit === 'sec' ? 'SECONDS' : 'REPS'}
           </div>
-          <div className="font-display font-bold" style={{ color: '#8b5cf6', fontSize: '0.9rem' }}>
+          <div className="font-display font-bold" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.9rem' }}>
             {exercise.targetReps}
           </div>
         </div>
@@ -148,17 +148,17 @@ function RepCounter({ exercise, onComplete }) {
           className="flex items-center justify-center rounded-full mb-4"
           style={{
             width: 72, height: 72,
-            background: 'rgba(16,185,129,0.15)',
+            background: 'rgba(var(--accent-green-rgb),0.15)',
             border: '2px solid #10b981',
-            boxShadow: '0 0 24px rgba(16,185,129,0.3)',
+            boxShadow: '0 0 24px rgba(var(--accent-green-rgb),0.3)',
           }}
         >
-          <CheckCircle2 size={32} color="#10b981" />
+          <CheckCircle2 size={32} color= "var(--accent-green)"  />
         </div>
-        <div className="font-display font-bold mb-1" style={{ color: '#10b981', fontSize: '1.1rem', letterSpacing: '0.08em' }}>
+        <div className="font-display font-bold mb-1" style={{ color:  'var(--accent-green)' , fontSize: '1.1rem', letterSpacing: '0.08em' }}>
           SET COMPLETE
         </div>
-        <div className="text-sm mb-1" style={{ color: '#8b90b8' }}>
+        <div className="text-sm mb-1" style={{ color:  'var(--text-secondary)'  }}>
           {exercise.sets} sets · {exercise.targetReps * exercise.sets} {exercise.unit || 'reps'} · {formatTime(seconds)}
         </div>
         <FormScore score={Math.floor(Math.random() * 15) + 82} />
@@ -178,12 +178,12 @@ function RepCounter({ exercise, onComplete }) {
     <div className="flex flex-col items-center py-4">
       {/* Timer */}
       <div className="flex items-center gap-4 mb-5">
-        <span className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.65rem' }}>
+        <span className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.65rem' }}>
           SET {set}/{exercise.sets}
         </span>
         <div
           className="font-display font-bold"
-          style={{ color: '#06b6d4', fontSize: '1.8rem', letterSpacing: '0.1em' }}
+          style={{ color:  'var(--accent-cyan)' , fontSize: '1.8rem', letterSpacing: '0.1em' }}
         >
           {formatTime(seconds)}
         </div>
@@ -192,11 +192,11 @@ function RepCounter({ exercise, onComplete }) {
           className="rounded-full flex items-center justify-center"
           style={{
             width: 32, height: 32,
-            background: running ? 'rgba(236,72,153,0.15)' : 'rgba(16,185,129,0.15)',
+            background: running ? 'rgba(var(--accent-pink-rgb),0.15)' : 'rgba(var(--accent-green-rgb),0.15)',
             border: running ? '1px solid #ec4899' : '1px solid #10b981',
           }}
         >
-          {running ? <Pause size={14} color="#ec4899" /> : <Play size={14} color="#10b981" />}
+          {running ? <Pause size={14} color= "var(--accent-pink)"  /> : <Play size={14} color= "var(--accent-green)"  />}
         </button>
       </div>
 
@@ -205,18 +205,18 @@ function RepCounter({ exercise, onComplete }) {
         <div
           className="w-full rounded-lg p-4 mb-4 text-center"
           style={{
-            background: 'rgba(6,182,212,0.08)',
-            border: '1px solid rgba(6,182,212,0.2)',
+            background: 'rgba(var(--accent-cyan-rgb),0.08)',
+            border: '1px solid rgba(var(--accent-cyan-rgb),0.2)',
           }}
         >
-          <div className="font-mono-code mb-1" style={{ color: '#06b6d4', fontSize: '0.65rem' }}>REST PERIOD</div>
-          <div className="font-display font-bold" style={{ color: '#e8eaff', fontSize: '2rem' }}>
+          <div className="font-mono-code mb-1" style={{ color:  'var(--accent-cyan)' , fontSize: '0.65rem' }}>REST PERIOD</div>
+          <div className="font-display font-bold" style={{ color:  'var(--text-primary)' , fontSize: '2rem' }}>
             {restSeconds}s
           </div>
           <button
             onClick={() => { setRestMode(false); setRestSeconds(60); clearInterval(restRef.current); }}
             className="text-xs mt-2"
-            style={{ color: '#8b90b8' }}
+            style={{ color:  'var(--text-secondary)'  }}
           >
             Skip rest →
           </button>
@@ -228,7 +228,7 @@ function RepCounter({ exercise, onComplete }) {
         <>
           <div className="relative mb-5" style={{ width: 160, height: 160 }}>
             <svg width={160} height={160} style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx={80} cy={80} r={70} fill="none" stroke="rgba(124,58,237,0.1)" strokeWidth={8} />
+              <circle cx={80} cy={80} r={70} fill="none" stroke="rgba(var(--accent-violet-rgb),0.1)" strokeWidth={8} />
               <circle
                 cx={80} cy={80} r={70}
                 fill="none"
@@ -237,23 +237,23 @@ function RepCounter({ exercise, onComplete }) {
                 strokeDasharray={2 * Math.PI * 70}
                 strokeDashoffset={2 * Math.PI * 70 * (1 - pct / 100)}
                 strokeLinecap="round"
-                style={{ transition: 'stroke-dashoffset 0.3s ease', filter: 'drop-shadow(0 0 6px rgba(124,58,237,0.5))' }}
+                style={{ transition: 'stroke-dashoffset 0.3s ease', filter: 'drop-shadow(0 0 6px rgba(var(--accent-violet-rgb),0.5))' }}
               />
               <defs>
                 <linearGradient id="repGrad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#7c3aed" />
-                  <stop offset="100%" stopColor="#06b6d4" />
+                  <stop offset="0%" stopColor= "var(--accent-violet)"  />
+                  <stop offset="100%" stopColor= "var(--accent-cyan)"  />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="font-display font-bold" style={{ color: '#e8eaff', fontSize: '2.8rem', lineHeight: 1 }}>
+              <div className="font-display font-bold" style={{ color:  'var(--text-primary)' , fontSize: '2.8rem', lineHeight: 1 }}>
                 {reps}
               </div>
-              <div className="font-mono-code" style={{ color: '#8b90b8', fontSize: '0.65rem' }}>
+              <div className="font-mono-code" style={{ color:  'var(--text-secondary)' , fontSize: '0.65rem' }}>
                 / {exercise.targetReps}
               </div>
-              <div className="font-mono-code mt-0.5" style={{ color: '#4a4f72', fontSize: '0.58rem' }}>
+              <div className="font-mono-code mt-0.5" style={{ color:  'var(--text-dim)' , fontSize: '0.58rem' }}>
                 {exercise.unit === 'sec' ? 'SECONDS' : 'REPS'}
               </div>
             </div>
@@ -265,12 +265,12 @@ function RepCounter({ exercise, onComplete }) {
               className="w-full rounded px-3 py-2 mb-4 text-xs text-center animate-slide-up"
               style={{
                 background: formFeedback.startsWith('✓')
-                  ? 'rgba(16,185,129,0.08)'
-                  : 'rgba(245,158,11,0.08)',
+                  ? 'rgba(var(--accent-green-rgb),0.08)'
+                  : 'rgba(var(--accent-amber-rgb),0.08)',
                 border: formFeedback.startsWith('✓')
-                  ? '1px solid rgba(16,185,129,0.25)'
-                  : '1px solid rgba(245,158,11,0.25)',
-                color: formFeedback.startsWith('✓') ? '#10b981' : '#f59e0b',
+                  ? '1px solid rgba(var(--accent-green-rgb),0.25)'
+                  : '1px solid rgba(var(--accent-amber-rgb),0.25)',
+                color: formFeedback.startsWith('✓') ?  'var(--accent-green)'  :  'var(--accent-amber)' ,
                 fontFamily: 'JetBrains Mono',
                 fontSize: '0.7rem',
               }}
@@ -309,9 +309,9 @@ function RepCounter({ exercise, onComplete }) {
 
 function WorkoutPrepPanel({ completed, onNavigate }) {
   const sessionTargets = [
-    { label: 'Exercise Pool', value: exercises.length, unit: 'moves', color: '#8b5cf6' },
-    { label: 'Target Sets', value: exercises.reduce((sum, ex) => sum + ex.sets, 0), unit: 'sets', color: '#06b6d4' },
-    { label: 'Completed', value: completed.length, unit: 'today', color: '#10b981' },
+    { label: 'Exercise Pool', value: exercises.length, unit: 'moves', color:  'var(--accent-violet-bright)'  },
+    { label: 'Target Sets', value: exercises.reduce((sum, ex) => sum + ex.sets, 0), unit: 'sets', color:  'var(--accent-cyan)'  },
+    { label: 'Completed', value: completed.length, unit: 'today', color:  'var(--accent-green)'  },
   ];
 
   return (
@@ -319,8 +319,8 @@ function WorkoutPrepPanel({ completed, onNavigate }) {
       <div
         className="rounded-lg p-5 relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.05))',
-          border: '1px solid rgba(124,58,237,0.2)',
+          background: 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.12), rgba(var(--accent-cyan-rgb),0.05))',
+          border: '1px solid rgba(var(--accent-violet-rgb),0.2)',
         }}
       >
         <div
@@ -329,7 +329,7 @@ function WorkoutPrepPanel({ completed, onNavigate }) {
         />
         <div className="relative">
           <div className="badge-live mb-3 inline-block">READY</div>
-          <div className="font-display font-bold mb-2" style={{ color: '#e8eaff', fontSize: '0.9rem', letterSpacing: '0.08em' }}>
+          <div className="font-display font-bold mb-2" style={{ color:  'var(--text-primary)' , fontSize: '0.9rem', letterSpacing: '0.08em' }}>
             SESSION PRIMER
           </div>
           <p className="text-sm mb-4" style={{ color: '#c4c8e8', lineHeight: 1.6, fontSize: '0.82rem' }}>
@@ -341,14 +341,14 @@ function WorkoutPrepPanel({ completed, onNavigate }) {
                 key={target.label}
                 className="rounded p-3 text-center"
                 style={{
-                  background: 'rgba(8,9,15,0.5)',
-                  border: `1px solid ${target.color}24`,
+                  background: 'rgba(var(--bg-base-rgb),0.5)',
+                  border: `1px solid ${window.themeColor(target.color, 0.24)}`,
                 }}
               >
                 <div className="font-display font-bold" style={{ color: target.color, fontSize: '1rem' }}>
                   {target.value}
                 </div>
-                <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.52rem' }}>
+                <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.52rem' }}>
                   {target.unit.toUpperCase()}
                 </div>
               </div>
@@ -360,25 +360,25 @@ function WorkoutPrepPanel({ completed, onNavigate }) {
       <div
         className="rounded-lg p-5"
         style={{
-          background: 'rgba(13,15,26,0.8)',
-          border: '1px solid rgba(124,58,237,0.15)',
+          background: 'rgba(var(--bg-surface-rgb),0.8)',
+          border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
         }}
       >
-        <div className="font-display font-bold mb-4" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+        <div className="font-display font-bold mb-4" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
           TODAY'S TARGETS
         </div>
         <div className="flex flex-col gap-3">
           {[
-            { label: 'Primary Focus', value: 'Upper + Core', color: '#8b5cf6' },
-            { label: 'Tempo', value: 'Controlled reps', color: '#06b6d4' },
-            { label: 'Rest Window', value: '60-90 sec', color: '#f59e0b' },
+            { label: 'Primary Focus', value: 'Upper + Core', color:  'var(--accent-violet-bright)'  },
+            { label: 'Tempo', value: 'Controlled reps', color:  'var(--accent-cyan)'  },
+            { label: 'Rest Window', value: '60-90 sec', color:  'var(--accent-amber)'  },
           ].map(item => (
             <div
               key={item.label}
               className="flex items-center justify-between rounded p-3"
-              style={{ background: 'rgba(124,58,237,0.05)', border: '1px solid rgba(124,58,237,0.08)' }}
+              style={{ background: 'rgba(var(--accent-violet-rgb),0.05)', border: '1px solid rgba(var(--accent-violet-rgb),0.08)' }}
             >
-              <span className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.58rem' }}>
+              <span className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.58rem' }}>
                 {item.label.toUpperCase()}
               </span>
               <span className="font-display font-semibold" style={{ color: item.color, fontSize: '0.72rem', letterSpacing: '0.04em' }}>
@@ -392,21 +392,21 @@ function WorkoutPrepPanel({ completed, onNavigate }) {
       <div
         className="rounded-lg p-5"
         style={{
-          background: 'rgba(13,15,26,0.8)',
-          border: '1px solid rgba(6,182,212,0.15)',
+          background: 'rgba(var(--bg-surface-rgb),0.8)',
+          border: '1px solid rgba(var(--accent-cyan-rgb),0.15)',
         }}
       >
         <div className="flex items-center gap-2 mb-3">
-          <Plus size={13} style={{ color: '#06b6d4' }} />
-          <div className="font-display font-bold" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+          <Plus size={13} style={{ color:  'var(--accent-cyan)'  }} />
+          <div className="font-display font-bold" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
             FORM SIGNALS
           </div>
         </div>
         <div className="flex flex-col gap-2.5">
           {['Neutral spine', 'Full range', 'Stable tempo'].map(signal => (
             <div key={signal} className="flex items-center gap-2">
-              <CheckCircle2 size={12} style={{ color: '#10b981' }} />
-              <span className="text-xs" style={{ color: '#8b90b8' }}>{signal}</span>
+              <CheckCircle2 size={12} style={{ color:  'var(--accent-green)'  }} />
+              <span className="text-xs" style={{ color:  'var(--text-secondary)'  }}>{signal}</span>
             </div>
           ))}
         </div>
@@ -439,10 +439,10 @@ export default function Workout({ onNavigate }) {
         {/* Header */}
         <div className="page-heading">
           <div className="chip mb-2">· AI FORM ANALYSIS ACTIVE</div>
-          <h1 className="font-display font-bold mb-1" style={{ color: '#e8eaff', fontSize: '1.3rem', letterSpacing: '0.08em' }}>
+          <h1 className="font-display font-bold mb-1" style={{ color:  'var(--text-primary)' , fontSize: '1.3rem', letterSpacing: '0.08em' }}>
             WORKOUT SESSION
           </h1>
-          <p className="text-sm" style={{ color: '#8b90b8' }}>
+          <p className="text-sm" style={{ color:  'var(--text-secondary)'  }}>
             Select an exercise · rep tracking + form correction via AI
           </p>
         </div>
@@ -470,7 +470,7 @@ export default function Workout({ onNavigate }) {
                       className="absolute top-2 right-2 z-10 rounded-full flex items-center justify-center"
                       style={{
                         width: 20, height: 20,
-                        background: '#10b981',
+                        background:  'var(--accent-green)' ,
                       }}
                     >
                       <CheckCircle2 size={12} color="white" />
@@ -493,20 +493,20 @@ export default function Workout({ onNavigate }) {
               <div
                 className="mt-5 rounded-lg p-4"
                 style={{
-                  background: 'rgba(16,185,129,0.06)',
-                  border: '1px solid rgba(16,185,129,0.2)',
+                  background: 'rgba(var(--accent-green-rgb),0.06)',
+                  border: '1px solid rgba(var(--accent-green-rgb),0.2)',
                 }}
               >
-                <div className="font-display font-bold mb-2" style={{ color: '#10b981', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+                <div className="font-display font-bold mb-2" style={{ color:  'var(--accent-green)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
                   SESSION PROGRESS
                 </div>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {completed.map(ex => (
                     <span key={ex.id} className="text-xs rounded px-2 py-1"
                       style={{
-                        background: 'rgba(16,185,129,0.1)',
-                        border: '1px solid rgba(16,185,129,0.2)',
-                        color: '#10b981',
+                        background: 'rgba(var(--accent-green-rgb),0.1)',
+                        border: '1px solid rgba(var(--accent-green-rgb),0.2)',
+                        color:  'var(--accent-green)' ,
                         fontFamily: 'JetBrains Mono',
                         fontSize: '0.65rem',
                       }}
@@ -529,13 +529,13 @@ export default function Workout({ onNavigate }) {
                 <div
                   className="mt-5 rounded-lg p-5"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.04))',
-                    border: '1px solid rgba(124,58,237,0.15)',
+                    background: 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.08), rgba(var(--accent-cyan-rgb),0.04))',
+                    border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
                   }}
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <Zap size={14} style={{ color: '#8b5cf6' }} />
-                    <div className="font-display font-bold" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+                    <Zap size={14} style={{ color:  'var(--accent-violet-bright)'  }} />
+                    <div className="font-display font-bold" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
                       AI TRAINING TIPS
                     </div>
                   </div>
@@ -550,12 +550,12 @@ export default function Workout({ onNavigate }) {
                         key={i}
                         className="flex items-start gap-2.5 rounded p-3"
                         style={{
-                          background: 'rgba(13,15,26,0.6)',
-                          border: '1px solid rgba(124,58,237,0.08)',
+                          background: 'rgba(var(--bg-surface-rgb),0.6)',
+                          border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                         }}
                       >
                         <span style={{ fontSize: '1rem', lineHeight: 1 }}>{t.icon}</span>
-                        <span className="text-xs" style={{ color: '#8b90b8', lineHeight: 1.5 }}>{t.tip}</span>
+                        <span className="text-xs" style={{ color:  'var(--text-secondary)' , lineHeight: 1.5 }}>{t.tip}</span>
                       </div>
                     ))}
                   </div>
@@ -568,31 +568,31 @@ export default function Workout({ onNavigate }) {
             <div
               className="rounded-lg relative overflow-hidden sticky-panel"
               style={{
-                background: 'rgba(13,15,26,0.9)',
-                border: '1px solid rgba(124,58,237,0.25)',
+                background: 'rgba(var(--bg-surface-rgb),0.9)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.25)',
               }}
             >
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse at top, rgba(124,58,237,0.08), transparent 60%)' }}
+                style={{ background: 'radial-gradient(ellipse at top, rgba(var(--accent-violet-rgb),0.08), transparent 60%)' }}
               />
               <div className="relative">
                 {/* Panel header */}
                 <div
                   className="flex items-center justify-between px-5 py-4"
-                  style={{ borderBottom: '1px solid rgba(124,58,237,0.12)' }}
+                  style={{ borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.12)' }}
                 >
                   <div>
                     <div className="badge-ai mb-1">AI TRACKING</div>
-                    <div className="font-display font-bold" style={{ color: '#e8eaff', fontSize: '0.9rem', letterSpacing: '0.06em' }}>
+                    <div className="font-display font-bold" style={{ color:  'var(--text-primary)' , fontSize: '0.9rem', letterSpacing: '0.06em' }}>
                       {selected.name.toUpperCase()}
                     </div>
-                    <div className="text-xs" style={{ color: '#8b90b8' }}>{selected.muscle}</div>
+                    <div className="text-xs" style={{ color:  'var(--text-secondary)'  }}>{selected.muscle}</div>
                   </div>
                   <button
                     onClick={() => { setSelected(null); setSessionActive(false); }}
                     className="rounded p-1"
-                    style={{ border: '1px solid rgba(124,58,237,0.15)', color: '#8b90b8' }}
+                    style={{ border: '1px solid rgba(var(--accent-violet-rgb),0.15)', color:  'var(--text-secondary)'  }}
                   >
                     <X size={14} />
                   </button>
@@ -603,8 +603,8 @@ export default function Workout({ onNavigate }) {
                   className="mx-5 mt-4 rounded-lg flex flex-col items-center justify-center relative overflow-hidden"
                   style={{
                     height: 180,
-                    background: 'rgba(8,9,15,0.8)',
-                    border: '1px dashed rgba(124,58,237,0.2)',
+                    background: 'rgba(var(--bg-base-rgb),0.8)',
+                    border: '1px dashed rgba(var(--accent-violet-rgb),0.2)',
                   }}
                 >
                   <div
@@ -618,10 +618,10 @@ export default function Workout({ onNavigate }) {
                   <div className="absolute bottom-3 right-3" style={{ width: 16, height: 16, borderBottom: '2px solid #7c3aed', borderRight: '2px solid #7c3aed' }} />
                   <div className="relative text-center">
                     <div className="text-2xl mb-2">📹</div>
-                    <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.65rem' }}>
+                    <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.65rem' }}>
                       CAMERA · POSTURE DETECTION
                     </div>
-                    <div className="font-mono-code mt-1" style={{ color: '#7c3aed', fontSize: '0.58rem' }}>
+                    <div className="font-mono-code mt-1" style={{ color:  'var(--accent-violet)' , fontSize: '0.58rem' }}>
                       AI MODEL LOADED
                     </div>
                   </div>

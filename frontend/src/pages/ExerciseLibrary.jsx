@@ -24,12 +24,12 @@ function GifPlaceholder({ size = 28, label = 'NO PREVIEW' }) {
   return (
     <div
       className="w-full h-full flex flex-col items-center justify-center gap-1.5"
-      style={{ background: 'rgba(8,9,15,0.8)' }}
+      style={{ background: 'rgba(var(--bg-base-rgb),0.8)' }}
     >
-      <Dumbbell size={size} style={{ color: 'rgba(139,92,246,0.3)' }} />
+      <Dumbbell size={size} style={{ color: 'rgba(var(--accent-violet-bright-rgb),0.3)' }} />
       <span
         className="font-mono-code"
-        style={{ color: 'rgba(139,92,246,0.3)', fontSize: '0.65rem', letterSpacing: '0.1em' }}
+        style={{ color: 'rgba(var(--accent-violet-bright-rgb),0.3)', fontSize: '0.65rem', letterSpacing: '0.1em' }}
       >
         {label}
       </span>
@@ -42,8 +42,8 @@ function ExerciseCard({ exercise, onView }) {
   const [imgFailed, setImgFailed] = useState(false);
 
   const difficultyColor = {
-    Beginner: '#10b981',
-    Intermediate: '#f59e0b',
+    Beginner:  'var(--accent-green)' ,
+    Intermediate:  'var(--accent-amber)' ,
     Advanced: '#ef4444',
   };
 
@@ -53,11 +53,11 @@ function ExerciseCard({ exercise, onView }) {
       onMouseLeave={() => setHovered(false)}
       className="rounded-xl overflow-hidden cursor-pointer group"
       style={{
-        background: 'rgba(13,15,26,0.85)',
-        border: `1px solid ${hovered ? 'rgba(124,58,237,0.35)' : 'rgba(124,58,237,0.12)'}`,
+        background: 'rgba(var(--bg-surface-rgb),0.85)',
+        border: `1px solid ${hovered ? 'rgba(var(--accent-violet-rgb),0.35)' : 'rgba(var(--accent-violet-rgb),0.12)'}`,
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
         boxShadow: hovered
-          ? '0 12px 28px -8px rgba(124,58,237,0.2), 0 0 0 1px rgba(124,58,237,0.08)'
+          ? '0 12px 28px -8px rgba(var(--accent-violet-rgb),0.2), 0 0 0 1px rgba(var(--accent-violet-rgb),0.08)'
           : '0 2px 8px rgba(0,0,0,0.25)',
         transition: 'all 0.35s cubic-bezier(0.23, 1, 0.32, 1)',
       }}
@@ -67,7 +67,7 @@ function ExerciseCard({ exercise, onView }) {
         className="relative w-full overflow-hidden"
         style={{
           aspectRatio: '16 / 9',
-          background: 'rgba(8,9,15,0.8)',
+          background: 'rgba(var(--bg-base-rgb),0.8)',
         }}
       >
         {exercise.gifUrl && !imgFailed ? (
@@ -92,7 +92,7 @@ function ExerciseCard({ exercise, onView }) {
           className="absolute bottom-0 left-0 right-0 pointer-events-none"
           style={{
             height: '40px',
-            background: 'linear-gradient(to top, rgba(13,15,26,0.7), transparent)',
+            background: 'linear-gradient(to top, rgba(var(--bg-surface-rgb),0.7), transparent)',
           }}
         />
       </div>
@@ -101,7 +101,7 @@ function ExerciseCard({ exercise, onView }) {
         <h3
           className="font-display font-bold truncate"
           style={{
-            color: '#e8eaff',
+            color:  'var(--text-primary)' ,
             fontSize: '0.875rem',
             letterSpacing: '0.04em',
             lineHeight: 1.3,
@@ -132,9 +132,9 @@ function ExerciseCard({ exercise, onView }) {
               fontSize: '0.65rem',
               padding: '2px 8px',
               borderRadius: '4px',
-              background: 'rgba(124,58,237,0.1)',
-              color: '#8b5cf6',
-              border: '1px solid rgba(124,58,237,0.22)',
+              background: 'rgba(var(--accent-violet-rgb),0.1)',
+              color:  'var(--accent-violet-bright)' ,
+              border: '1px solid rgba(var(--accent-violet-rgb),0.22)',
               letterSpacing: '0.06em',
             }}
           >
@@ -145,7 +145,7 @@ function ExerciseCard({ exercise, onView }) {
         <p
           className="line-clamp-2"
           style={{
-            color: '#8b90b8',
+            color:  'var(--text-secondary)' ,
             fontSize: '0.8rem',
             lineHeight: 1.55,
             marginBottom: '14px',
@@ -157,12 +157,12 @@ function ExerciseCard({ exercise, onView }) {
         <div className="flex gap-2">
           <button
             onClick={(e) => { e.stopPropagation(); onView(exercise); }}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-lg font-bold tracking-wider transition-all hover:bg-[rgba(124,58,237,0.12)] active:scale-[0.97]"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-lg font-bold tracking-wider transition-all hover:bg-[rgba(var(--accent-violet-rgb),0.12)] active:scale-[0.97]"
             style={{
               padding: '7px 10px',
               fontSize: '0.65rem',
-              background: 'rgba(124,58,237,0.06)',
-              border: '1px solid rgba(124,58,237,0.18)',
+              background: 'rgba(var(--accent-violet-rgb),0.06)',
+              border: '1px solid rgba(var(--accent-violet-rgb),0.18)',
               color: '#c4c8e8',
               letterSpacing: '0.08em',
             }}
@@ -214,8 +214,8 @@ function DetailModal({ exercise, onClose }) {
   if (!exercise) return null;
 
   const difficultyMap = {
-    Beginner:     { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.28)', label: 'BEGINNER' },
-    Intermediate: { color: '#f59e0b', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.28)', label: 'INTERMEDIATE' },
+    Beginner:     { color:  'var(--accent-green)' , bg: 'rgba(var(--accent-green-rgb),0.12)', border: 'rgba(var(--accent-green-rgb),0.28)', label: 'BEGINNER' },
+    Intermediate: { color:  'var(--accent-amber)' , bg: 'rgba(var(--accent-amber-rgb),0.12)', border: 'rgba(var(--accent-amber-rgb),0.28)', label: 'INTERMEDIATE' },
     Advanced:     { color: '#ef4444', bg: 'rgba(239,68,68,0.12)',  border: 'rgba(239,68,68,0.28)',  label: 'ADVANCED' },
   };
   const diff = difficultyMap[exercise.difficulty] || difficultyMap.Beginner;
@@ -268,10 +268,10 @@ function DetailModal({ exercise, onClose }) {
           style={{
             maxWidth: '780px',
             maxHeight: '90vh',
-            background: 'rgba(13,15,26,0.97)',
-            border: '1px solid rgba(124,58,237,0.18)',
+            background: 'rgba(var(--bg-surface-rgb),0.97)',
+            border: '1px solid rgba(var(--accent-violet-rgb),0.18)',
             borderRadius: '16px',
-            boxShadow: '0 32px 64px -16px rgba(0,0,0,0.7), 0 0 40px rgba(124,58,237,0.08)',
+            boxShadow: '0 32px 64px -16px rgba(0,0,0,0.7), 0 0 40px rgba(var(--accent-violet-rgb),0.08)',
             animation: 'modalPanelIn 0.35s cubic-bezier(0.16,1,0.3,1) both',
           }}
         >
@@ -281,7 +281,7 @@ function DetailModal({ exercise, onClose }) {
               borderRadius: '16px 16px 0 0',
               aspectRatio: '16 / 9',
               maxHeight: '320px',
-              background: 'rgba(8,9,15,0.8)',
+              background: 'rgba(var(--bg-base-rgb),0.8)',
             }}
           >
             {/* Close button – stays in header */}
@@ -294,21 +294,21 @@ function DetailModal({ exercise, onClose }) {
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                background: 'rgba(13,15,26,0.8)',
-                border: '1px solid rgba(124,58,237,0.25)',
-                color: '#8b90b8',
+                background: 'rgba(var(--bg-surface-rgb),0.8)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.25)',
+                color:  'var(--text-secondary)' ,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(124,58,237,0.2)';
-                e.currentTarget.style.color = '#e8eaff';
-                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)';
+                e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.2)';
+                e.currentTarget.style.color =  'var(--text-primary)' ;
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.5)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(13,15,26,0.8)';
-                e.currentTarget.style.color = '#8b90b8';
-                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.25)';
+                e.currentTarget.style.background = 'rgba(var(--bg-surface-rgb),0.8)';
+                e.currentTarget.style.color =  'var(--text-secondary)' ;
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.25)';
               }}
             >
               <X size={15} />
@@ -334,7 +334,7 @@ function DetailModal({ exercise, onClose }) {
             {/* bottom fade */}
             <div
               className="absolute bottom-0 left-0 right-0 pointer-events-none"
-              style={{ height: '60px', background: 'linear-gradient(to top, rgba(13,15,26,0.97), transparent)' }}
+              style={{ height: '60px', background: 'linear-gradient(to top, rgba(var(--bg-surface-rgb),0.97), transparent)' }}
             />
           </div>
 
@@ -343,11 +343,11 @@ function DetailModal({ exercise, onClose }) {
             {/* Title + description */}
             <h2
               className="font-display font-bold"
-              style={{ color: '#e8eaff', fontSize: '1.25rem', letterSpacing: '0.05em', marginBottom: '6px' }}
+              style={{ color:  'var(--text-primary)' , fontSize: '1.25rem', letterSpacing: '0.05em', marginBottom: '6px' }}
             >
               {exercise.name}
             </h2>
-            <p style={{ color: '#8b90b8', fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '20px' }}>
+            <p style={{ color:  'var(--text-secondary)' , fontSize: '0.8rem', lineHeight: 1.6, marginBottom: '20px' }}>
               {exercise.description}
             </p>
 
@@ -362,21 +362,21 @@ function DetailModal({ exercise, onClose }) {
               className="modal-meta-grid"
             >
               <div>
-                <div className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color: '#4a4f72', letterSpacing: '0.1em', marginBottom: '10px' }}>
+                <div className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color:  'var(--text-dim)' , letterSpacing: '0.1em', marginBottom: '10px' }}>
                   DETAILS
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <Badge icon={<Dumbbell size={12} />} label={exercise.equipment || 'Bodyweight'} color="#8b5cf6" bg="rgba(124,58,237,0.1)" border="rgba(124,58,237,0.22)" />
+                  <Badge icon={<Dumbbell size={12} />} label={exercise.equipment || 'Bodyweight'} color= "var(--accent-violet-bright)"  bg="rgba(var(--accent-violet-rgb),0.1)" border="rgba(var(--accent-violet-rgb),0.22)" />
                   <Badge icon={<Flame size={12} />} label={diff.label} color={diff.color} bg={diff.bg} border={diff.border} />
-                  <Badge icon={<Target size={12} />} label={exercise.muscleGroup} color="#06b6d4" bg="rgba(6,182,212,0.1)" border="rgba(6,182,212,0.22)" />
+                  <Badge icon={<Target size={12} />} label={exercise.muscleGroup} color= "var(--accent-cyan)"  bg="rgba(var(--accent-cyan-rgb),0.1)" border="rgba(var(--accent-cyan-rgb),0.22)" />
                   {exercise.type && (
-                    <Badge icon={<BarChart2 size={12} />} label={exercise.type.toUpperCase()} color="#ec4899" bg="rgba(236,72,153,0.1)" border="rgba(236,72,153,0.22)" />
+                    <Badge icon={<BarChart2 size={12} />} label={exercise.type.toUpperCase()} color= "var(--accent-pink)"  bg="rgba(var(--accent-pink-rgb),0.1)" border="rgba(var(--accent-pink-rgb),0.22)" />
                   )}
                 </div>
               </div>
 
               <div>
-                <div className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color: '#4a4f72', letterSpacing: '0.1em', marginBottom: '10px' }}>
+                <div className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color:  'var(--text-dim)' , letterSpacing: '0.1em', marginBottom: '10px' }}>
                   MUSCLES WORKED
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -388,9 +388,9 @@ function DetailModal({ exercise, onClose }) {
                         fontSize: '0.65rem',
                         padding: '4px 10px',
                         borderRadius: '20px',
-                        background: 'rgba(124,58,237,0.07)',
+                        background: 'rgba(var(--accent-violet-rgb),0.07)',
                         color: '#c4c8e8',
-                        border: '1px solid rgba(124,58,237,0.13)',
+                        border: '1px solid rgba(var(--accent-violet-rgb),0.13)',
                       }}
                     >
                       {m}
@@ -401,13 +401,13 @@ function DetailModal({ exercise, onClose }) {
             </div>
 
             {/* Divider */}
-            <div style={{ height: '1px', background: 'rgba(124,58,237,0.1)', marginBottom: '24px' }} />
+            <div style={{ height: '1px', background: 'rgba(var(--accent-violet-rgb),0.1)', marginBottom: '24px' }} />
 
             {/* Step-by-step */}
             <div style={{ marginBottom: '24px' }}>
               <div className="flex items-center gap-2" style={{ marginBottom: '14px' }}>
-                <Info size={13} style={{ color: '#8b5cf6' }} />
-                <span className="font-mono-code font-bold" style={{ fontSize: '0.65rem', color: '#4a4f72', letterSpacing: '0.1em' }}>
+                <Info size={13} style={{ color:  'var(--accent-violet-bright)'  }} />
+                <span className="font-mono-code font-bold" style={{ fontSize: '0.65rem', color:  'var(--text-dim)' , letterSpacing: '0.1em' }}>
                   STEP-BY-STEP INSTRUCTIONS
                 </span>
               </div>
@@ -420,17 +420,17 @@ function DetailModal({ exercise, onClose }) {
                     style={{
                       padding: '12px 14px',
                       borderRadius: '10px',
-                      background: 'rgba(124,58,237,0.04)',
-                      border: '1px solid rgba(124,58,237,0.08)',
+                      background: 'rgba(var(--accent-violet-rgb),0.04)',
+                      border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                       transition: 'all 0.2s ease',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(124,58,237,0.08)';
-                      e.currentTarget.style.borderColor = 'rgba(124,58,237,0.18)';
+                      e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.08)';
+                      e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.18)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'rgba(124,58,237,0.04)';
-                      e.currentTarget.style.borderColor = 'rgba(124,58,237,0.08)';
+                      e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.04)';
+                      e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.08)';
                     }}
                   >
                     <div
@@ -439,9 +439,9 @@ function DetailModal({ exercise, onClose }) {
                         width: '26px',
                         height: '26px',
                         borderRadius: '7px',
-                        background: 'rgba(124,58,237,0.15)',
-                        border: '1px solid rgba(124,58,237,0.25)',
-                        color: '#8b5cf6',
+                        background: 'rgba(var(--accent-violet-rgb),0.15)',
+                        border: '1px solid rgba(var(--accent-violet-rgb),0.25)',
+                        color:  'var(--accent-violet-bright)' ,
                         fontSize: '0.7rem',
                         marginTop: '1px',
                       }}
@@ -472,8 +472,8 @@ function DetailModal({ exercise, onClose }) {
                     style={{
                       borderRadius: '12px',
                       padding: '16px 18px',
-                      background: 'rgba(16,185,129,0.05)',
-                      border: '1px solid rgba(16,185,129,0.15)',
+                      background: 'rgba(var(--accent-green-rgb),0.05)',
+                      border: '1px solid rgba(var(--accent-green-rgb),0.15)',
                     }}
                   >
                     <div className="flex items-center gap-2" style={{ marginBottom: '12px' }}>
@@ -483,19 +483,19 @@ function DetailModal({ exercise, onClose }) {
                           width: '24px',
                           height: '24px',
                           borderRadius: '6px',
-                          background: 'rgba(16,185,129,0.15)',
+                          background: 'rgba(var(--accent-green-rgb),0.15)',
                         }}
                       >
-                        <CheckCircle size={13} color="#10b981" />
+                        <CheckCircle size={13} color= "var(--accent-green)"  />
                       </div>
-                      <span className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color: '#10b981', letterSpacing: '0.1em' }}>
+                      <span className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color:  'var(--accent-green)' , letterSpacing: '0.1em' }}>
                         FORM TIPS
                       </span>
                     </div>
                     <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                       {exercise.formTips.map((tip, i) => (
-                        <li key={i} className="flex items-start gap-2" style={{ fontSize: '0.78rem', color: '#8b90b8', lineHeight: 1.55 }}>
-                          <span style={{ color: '#10b981', marginTop: '2px', flexShrink: 0 }}>›</span>
+                        <li key={i} className="flex items-start gap-2" style={{ fontSize: '0.78rem', color:  'var(--text-secondary)' , lineHeight: 1.55 }}>
+                          <span style={{ color:  'var(--accent-green)' , marginTop: '2px', flexShrink: 0 }}>›</span>
                           {tip}
                         </li>
                       ))}
@@ -508,8 +508,8 @@ function DetailModal({ exercise, onClose }) {
                     style={{
                       borderRadius: '12px',
                       padding: '16px 18px',
-                      background: 'rgba(245,158,11,0.04)',
-                      border: '1px solid rgba(245,158,11,0.14)',
+                      background: 'rgba(var(--accent-amber-rgb),0.04)',
+                      border: '1px solid rgba(var(--accent-amber-rgb),0.14)',
                     }}
                   >
                     <div className="flex items-center gap-2" style={{ marginBottom: '12px' }}>
@@ -519,19 +519,19 @@ function DetailModal({ exercise, onClose }) {
                           width: '24px',
                           height: '24px',
                           borderRadius: '6px',
-                          background: 'rgba(245,158,11,0.15)',
+                          background: 'rgba(var(--accent-amber-rgb),0.15)',
                         }}
                       >
-                        <AlertTriangle size={13} color="#f59e0b" />
+                        <AlertTriangle size={13} color= "var(--accent-amber)"  />
                       </div>
-                      <span className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color: '#f59e0b', letterSpacing: '0.1em' }}>
+                      <span className="font-mono-code font-bold" style={{ fontSize: '0.6rem', color:  'var(--accent-amber)' , letterSpacing: '0.1em' }}>
                         COMMON MISTAKES
                       </span>
                     </div>
                     <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                       {exercise.commonMistakes.map((mistake, i) => (
-                        <li key={i} className="flex items-start gap-2" style={{ fontSize: '0.78rem', color: '#8b90b8', lineHeight: 1.55 }}>
-                          <span style={{ color: '#f59e0b', marginTop: '2px', flexShrink: 0 }}>›</span>
+                        <li key={i} className="flex items-start gap-2" style={{ fontSize: '0.78rem', color:  'var(--text-secondary)' , lineHeight: 1.55 }}>
+                          <span style={{ color:  'var(--accent-amber)' , marginTop: '2px', flexShrink: 0 }}>›</span>
                           {mistake}
                         </li>
                       ))}
@@ -554,21 +554,21 @@ function DetailModal({ exercise, onClose }) {
                     borderRadius: '10px',
                     fontSize: '0.7rem',
                     letterSpacing: '0.08em',
-                    background: 'linear-gradient(135deg, rgba(124,58,237,0.25), rgba(139,92,246,0.15))',
-                    border: '1px solid rgba(124,58,237,0.35)',
-                    color: '#e8eaff',
+                    background: 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.25), rgba(var(--accent-violet-bright-rgb),0.15))',
+                    border: '1px solid rgba(var(--accent-violet-rgb),0.35)',
+                    color:  'var(--text-primary)' ,
                     textDecoration: 'none',
                     transition: 'all 0.25s ease',
-                    boxShadow: '0 0 16px rgba(124,58,237,0.15)',
+                    boxShadow: '0 0 16px rgba(var(--accent-violet-rgb),0.15)',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(139,92,246,0.25))';
-                    e.currentTarget.style.boxShadow = '0 0 24px rgba(124,58,237,0.3)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.4), rgba(var(--accent-violet-bright-rgb),0.25))';
+                    e.currentTarget.style.boxShadow = '0 0 24px rgba(var(--accent-violet-rgb),0.3)';
                     e.currentTarget.style.transform = 'translateY(-1px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(124,58,237,0.25), rgba(139,92,246,0.15))';
-                    e.currentTarget.style.boxShadow = '0 0 16px rgba(124,58,237,0.15)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.25), rgba(var(--accent-violet-bright-rgb),0.15))';
+                    e.currentTarget.style.boxShadow = '0 0 16px rgba(var(--accent-violet-rgb),0.15)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -634,7 +634,7 @@ export default function ExerciseLibrary() {
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-              <circle cx="0.5" cy="0.5" r="0.5" fill="rgba(124,58,237,0.3)" />
+              <circle cx="0.5" cy="0.5" r="0.5" fill="rgba(var(--accent-violet-rgb),0.3)" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -647,7 +647,7 @@ export default function ExerciseLibrary() {
           <h1
             className="font-display font-bold"
             style={{
-              color: '#e8eaff',
+              color:  'var(--text-primary)' ,
               fontSize: '1.35rem',
               letterSpacing: '0.08em',
               marginBottom: '6px',
@@ -655,7 +655,7 @@ export default function ExerciseLibrary() {
           >
             EXERCISE LIBRARY
           </h1>
-          <p style={{ color: '#8b90b8', fontSize: '0.85rem', lineHeight: 1.5 }}>
+          <p style={{ color:  'var(--text-secondary)' , fontSize: '0.85rem', lineHeight: 1.5 }}>
             Browse exercises with form guides, tips, and video demonstrations.
           </p>
         </div>
@@ -669,14 +669,14 @@ export default function ExerciseLibrary() {
             <Search
               size={16}
               className="absolute left-3.5 top-1/2 -translate-y-1/2"
-              style={{ color: '#8b5cf6' }}
+              style={{ color:  'var(--accent-violet-bright)'  }}
             />
             <input
               type="text"
               placeholder="Search exercises..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg bg-[rgba(13,15,26,0.8)] border border-[rgba(124,58,237,0.15)] text-[#e8eaff] placeholder-[#4a4f72] focus:outline-none focus:border-[#8b5cf6] focus:shadow-[0_0_8px_rgba(124,58,237,0.2)] transition-all font-mono-code"
+              className="w-full rounded-lg bg-[rgba(var(--bg-surface-rgb),0.8)] border border-[rgba(var(--accent-violet-rgb),0.15)] text-[#e8eaff] placeholder-[#4a4f72] focus:outline-none focus:border-[#8b5cf6] focus:shadow-[0_0_8px_rgba(var(--accent-violet-rgb),0.2)] transition-all font-mono-code"
               style={{ padding: '9px 14px 9px 38px', fontSize: '0.8rem' }}
             />
           </div>
@@ -685,7 +685,7 @@ export default function ExerciseLibrary() {
             <select
               value={selectedMuscle}
               onChange={(e) => setSelectedMuscle(e.target.value)}
-              className="rounded-lg bg-[rgba(13,15,26,0.8)] border border-[rgba(124,58,237,0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
+              className="rounded-lg bg-[rgba(var(--bg-surface-rgb),0.8)] border border-[rgba(var(--accent-violet-rgb),0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
               style={{ ...selectStyle, padding: '9px 32px 9px 14px', fontSize: '0.75rem' }}
             >
               {muscleGroups.map(m => <option key={m} value={m}>{m === 'All' ? 'All Muscles' : m}</option>)}
@@ -694,7 +694,7 @@ export default function ExerciseLibrary() {
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="rounded-lg bg-[rgba(13,15,26,0.8)] border border-[rgba(124,58,237,0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
+              className="rounded-lg bg-[rgba(var(--bg-surface-rgb),0.8)] border border-[rgba(var(--accent-violet-rgb),0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
               style={{ ...selectStyle, padding: '9px 32px 9px 14px', fontSize: '0.75rem' }}
             >
               {difficulties.map(d => <option key={d} value={d}>{d === 'All' ? 'All Levels' : d}</option>)}
@@ -703,7 +703,7 @@ export default function ExerciseLibrary() {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="rounded-lg bg-[rgba(13,15,26,0.8)] border border-[rgba(124,58,237,0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
+              className="rounded-lg bg-[rgba(var(--bg-surface-rgb),0.8)] border border-[rgba(var(--accent-violet-rgb),0.15)] text-[#e8eaff] focus:outline-none focus:border-[#8b5cf6] font-mono-code cursor-pointer"
               style={{ ...selectStyle, padding: '9px 32px 9px 14px', fontSize: '0.75rem' }}
             >
               {types.map(t => <option key={t} value={t}>{t === 'All' ? 'All Types' : t}</option>)}
@@ -714,7 +714,7 @@ export default function ExerciseLibrary() {
         {/* Result count */}
         <div
           className="font-mono-code"
-          style={{ color: '#4a4f72', fontSize: '0.7rem', marginBottom: '20px', letterSpacing: '0.06em' }}
+          style={{ color:  'var(--text-dim)' , fontSize: '0.7rem', marginBottom: '20px', letterSpacing: '0.06em' }}
         >
           {filtered.length} EXERCISE{filtered.length !== 1 ? 'S' : ''} FOUND
         </div>
@@ -733,9 +733,9 @@ export default function ExerciseLibrary() {
         {/* Empty state */}
         {filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <BarChart2 size={40} className="mb-4" style={{ color: '#4a4f72' }} />
-            <h3 className="font-display mb-2" style={{ color: '#8b90b8', fontSize: '1rem' }}>No exercises found</h3>
-            <p style={{ color: '#4a4f72', fontSize: '0.8rem' }}>Try adjusting your search or filters.</p>
+            <BarChart2 size={40} className="mb-4" style={{ color:  'var(--text-dim)'  }} />
+            <h3 className="font-display mb-2" style={{ color:  'var(--text-secondary)' , fontSize: '1rem' }}>No exercises found</h3>
+            <p style={{ color:  'var(--text-dim)' , fontSize: '0.8rem' }}>Try adjusting your search or filters.</p>
           </div>
         )}
       </div>

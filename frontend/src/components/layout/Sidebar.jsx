@@ -35,8 +35,8 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
     @keyframes sb-indicator-glow {
-      0%, 100% { box-shadow: 0 0 8px rgba(139,92,246,0.45), 0 0 3px rgba(139,92,246,0.3); }
-      50%      { box-shadow: 0 0 14px rgba(139,92,246,0.6), 0 0 5px rgba(139,92,246,0.4); }
+      0%, 100% { box-shadow: 0 0 8px rgba(var(--accent-violet-bright-rgb),0.45), 0 0 3px rgba(var(--accent-violet-bright-rgb),0.3); }
+      50%      { box-shadow: 0 0 14px rgba(var(--accent-violet-bright-rgb),0.6), 0 0 5px rgba(var(--accent-violet-bright-rgb),0.4); }
     }
 
     .sb-scroll::-webkit-scrollbar { width: 0; }
@@ -58,7 +58,7 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
       outline: none;
     }
     .sb-nav-item:hover {
-      background: rgba(124,58,237,0.07);
+      background: rgba(var(--accent-violet-rgb),0.07);
     }
     .sb-nav-item:active {
       transform: scale(0.98);
@@ -71,7 +71,7 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
     }
     .sb-nav-item:hover .sb-ico {
       color: #c4b5fd !important;
-      filter: drop-shadow(0 0 5px rgba(139,92,246,0.3));
+      filter: drop-shadow(0 0 5px rgba(var(--accent-violet-bright-rgb),0.3));
       transform: translateX(1px);
     }
 
@@ -85,7 +85,7 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
 
     /* ── Active state ── */
     .sb-nav-item--on {
-      background: rgba(124,58,237,0.1) !important;
+      background: rgba(var(--accent-violet-rgb),0.1) !important;
     }
     .sb-nav-item--on::before {
       content: '';
@@ -101,7 +101,7 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
     }
     .sb-nav-item--on .sb-ico {
       color: #a78bfa !important;
-      filter: drop-shadow(0 0 6px rgba(139,92,246,0.35));
+      filter: drop-shadow(0 0 6px rgba(var(--accent-violet-bright-rgb),0.35));
     }
     .sb-nav-item--on .sb-lbl {
       color: #e8eaff !important;
@@ -138,8 +138,8 @@ if (typeof document !== 'undefined' && !document.getElementById(SHEET_ID)) {
       border: 1px solid transparent;
     }
     .sb-profile-row:hover {
-      background: rgba(124,58,237,0.06);
-      border-color: rgba(124,58,237,0.12);
+      background: rgba(var(--accent-violet-rgb),0.06);
+      border-color: rgba(var(--accent-violet-rgb),0.12);
     }
   `;
   document.head.appendChild(s);
@@ -164,8 +164,8 @@ export default function Sidebar({ activePage, onNavigate }) {
       className="fixed left-0 top-0 h-screen flex flex-col z-50"
       style={{
         width: 'var(--sidebar-width)',
-        background: 'rgba(8,9,15,0.98)',
-        borderRight: '1px solid rgba(124,58,237,0.1)',
+        background: 'rgba(var(--bg-base-rgb),0.98)',
+        borderRight: '1px solid rgba(var(--accent-violet-rgb),0.1)',
         boxShadow: '2px 0 28px rgba(0,0,0,0.45)',
       }}
     >
@@ -177,7 +177,7 @@ export default function Sidebar({ activePage, onNavigate }) {
           alignItems: 'center',
           gap: 11,
           padding: '20px 20px 18px',
-          borderBottom: '1px solid rgba(124,58,237,0.08)',
+          borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.08)',
           cursor: 'pointer',
           transition: 'opacity 0.2s ease',
         }}
@@ -193,7 +193,7 @@ export default function Sidebar({ activePage, onNavigate }) {
             justifyContent: 'center',
             borderRadius: 9,
             background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
-            boxShadow: '0 0 18px rgba(124,58,237,0.4), 0 0 6px rgba(6,182,212,0.2)',
+            boxShadow: '0 0 18px rgba(var(--accent-violet-rgb),0.4), 0 0 6px rgba(var(--accent-cyan-rgb),0.2)',
             flexShrink: 0,
           }}
         >
@@ -205,7 +205,7 @@ export default function Sidebar({ activePage, onNavigate }) {
             fontSize: '14px',
             fontWeight: 700,
             letterSpacing: '0.14em',
-            color: '#e8eaff',
+            color:  'var(--text-primary)' ,
             lineHeight: 1,
           }}
         >
@@ -239,7 +239,7 @@ export default function Sidebar({ activePage, onNavigate }) {
                 strokeWidth={isActive ? 2.1 : 1.7}
                 className="sb-ico"
                 style={{
-                  color: isActive ? '#a78bfa' : '#8b90b8',
+                  color: isActive ? '#a78bfa' :  'var(--text-secondary)' ,
                 }}
               />
               <span
@@ -247,7 +247,7 @@ export default function Sidebar({ activePage, onNavigate }) {
                 style={{
                   fontSize: '13px',
                   fontWeight: isActive ? 600 : 450,
-                  color: isActive ? '#e8eaff' : '#8b90b8',
+                  color: isActive ?  'var(--text-primary)'  :  'var(--text-secondary)' ,
                   letterSpacing: '0.015em',
                   fontFamily: "'Space Grotesk', sans-serif",
                   lineHeight: 1,
@@ -266,7 +266,7 @@ export default function Sidebar({ activePage, onNavigate }) {
         className="relative"
         style={{
           padding: '10px 10px 14px',
-          borderTop: '1px solid rgba(124,58,237,0.08)',
+          borderTop: '1px solid rgba(var(--accent-violet-rgb),0.08)',
         }}
       >
         {/* Dropdown */}
@@ -280,10 +280,10 @@ export default function Sidebar({ activePage, onNavigate }) {
               marginBottom: 8,
               borderRadius: 12,
               overflow: 'hidden',
-              background: 'rgba(11,13,22,0.98)',
-              border: '1px solid rgba(124,58,237,0.18)',
+              background: 'rgba(var(--bg-card-rgb),0.98)',
+              border: '1px solid rgba(var(--accent-violet-rgb),0.18)',
               boxShadow:
-                '0 -10px 36px rgba(0,0,0,0.55), 0 0 0 1px rgba(124,58,237,0.06), 0 0 24px rgba(124,58,237,0.06)',
+                '0 -10px 36px rgba(0,0,0,0.55), 0 0 0 1px rgba(var(--accent-violet-rgb),0.06), 0 0 24px rgba(var(--accent-violet-rgb),0.06)',
               backdropFilter: 'blur(20px)',
               animation: 'sb-dropdown-enter 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
               padding: 5,
@@ -292,7 +292,7 @@ export default function Sidebar({ activePage, onNavigate }) {
             <button
               className="sb-dd-btn"
               onClick={() => { onNavigate('profile'); setShowDropdown(false); }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(124,58,237,0.08)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.08)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
             >
               <div
@@ -303,28 +303,28 @@ export default function Sidebar({ activePage, onNavigate }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'rgba(124,58,237,0.12)',
+                  background: 'rgba(var(--accent-violet-rgb),0.12)',
                   flexShrink: 0,
                 }}
               >
                 <User size={14} style={{ color: '#a78bfa' }} />
               </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: '#e8eaff', fontFamily: "'Inter', sans-serif" }}>
+                <div style={{ fontSize: 13, fontWeight: 500, color:  'var(--text-primary)' , fontFamily: "'Inter', sans-serif" }}>
                   View Profile
                 </div>
-                <div style={{ fontSize: 10.5, color: '#4a4f72', marginTop: 1, fontFamily: "'Inter', sans-serif" }}>
+                <div style={{ fontSize: 10.5, color:  'var(--text-dim)' , marginTop: 1, fontFamily: "'Inter', sans-serif" }}>
                   Account & settings
                 </div>
               </div>
             </button>
 
-            <div style={{ height: 1, background: 'rgba(124,58,237,0.08)', margin: '3px 12px' }} />
+            <div style={{ height: 1, background: 'rgba(var(--accent-violet-rgb),0.08)', margin: '3px 12px' }} />
 
             <button
               className="sb-dd-btn"
               onClick={() => { alert('Logging out...'); setShowDropdown(false); }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(248,113,113,0.06)'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(var(--accent-pink-rgb),0.06)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
             >
               <div
@@ -335,7 +335,7 @@ export default function Sidebar({ activePage, onNavigate }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'rgba(248,113,113,0.08)',
+                  background: 'rgba(var(--accent-pink-rgb),0.08)',
                   flexShrink: 0,
                 }}
               >
@@ -345,7 +345,7 @@ export default function Sidebar({ activePage, onNavigate }) {
                 <div style={{ fontSize: 13, fontWeight: 500, color: '#f87171', fontFamily: "'Inter', sans-serif" }}>
                   Logout
                 </div>
-                <div style={{ fontSize: 10.5, color: '#4a4f72', marginTop: 1, fontFamily: "'Inter', sans-serif" }}>
+                <div style={{ fontSize: 10.5, color:  'var(--text-dim)' , marginTop: 1, fontFamily: "'Inter', sans-serif" }}>
                   End session
                 </div>
               </div>
@@ -358,8 +358,8 @@ export default function Sidebar({ activePage, onNavigate }) {
           className="sb-profile-row"
           onClick={() => setShowDropdown((v) => !v)}
           style={{
-            background: showDropdown ? 'rgba(124,58,237,0.06)' : 'transparent',
-            borderColor: showDropdown ? 'rgba(124,58,237,0.15)' : 'transparent',
+            background: showDropdown ? 'rgba(var(--accent-violet-rgb),0.06)' : 'transparent',
+            borderColor: showDropdown ? 'rgba(var(--accent-violet-rgb),0.15)' : 'transparent',
           }}
         >
           {/* Avatar */}
@@ -377,7 +377,7 @@ export default function Sidebar({ activePage, onNavigate }) {
               fontSize: '0.68rem',
               fontWeight: 700,
               flexShrink: 0,
-              boxShadow: '0 0 14px rgba(124,58,237,0.3)',
+              boxShadow: '0 0 14px rgba(var(--accent-violet-rgb),0.3)',
               letterSpacing: '0.04em',
             }}
           >
@@ -389,7 +389,7 @@ export default function Sidebar({ activePage, onNavigate }) {
               style={{
                 fontSize: 13,
                 fontWeight: 600,
-                color: '#e8eaff',
+                color:  'var(--text-primary)' ,
                 lineHeight: 1.2,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -402,7 +402,7 @@ export default function Sidebar({ activePage, onNavigate }) {
             <div
               style={{
                 fontSize: 10.5,
-                color: '#4a4f72',
+                color:  'var(--text-dim)' ,
                 marginTop: 2,
                 display: 'flex',
                 alignItems: 'center',
@@ -419,7 +419,7 @@ export default function Sidebar({ activePage, onNavigate }) {
           <ChevronRight
             size={13}
             style={{
-              color: '#4a4f72',
+              color:  'var(--text-dim)' ,
               flexShrink: 0,
               transition: 'transform 0.2s ease, color 0.2s ease',
               transform: showDropdown ? 'rotate(90deg)' : 'rotate(0deg)',

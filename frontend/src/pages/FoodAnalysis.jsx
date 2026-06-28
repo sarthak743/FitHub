@@ -31,8 +31,8 @@ function NutrientBar({ label, value, max, color }) {
   return (
     <div>
       <div className="flex justify-between mb-1">
-        <span className="font-mono-code" style={{ color: '#8b90b8', fontSize: '0.62rem' }}>{label}</span>
-        <span className="font-mono-code font-bold" style={{ color: '#e8eaff', fontSize: '0.62rem' }}>
+        <span className="font-mono-code" style={{ color:  'var(--text-secondary)' , fontSize: '0.62rem' }}>{label}</span>
+        <span className="font-mono-code font-bold" style={{ color:  'var(--text-primary)' , fontSize: '0.62rem' }}>
           {value}g
         </span>
       </div>
@@ -74,10 +74,10 @@ export default function FoodAnalysis() {
   };
 
   const ratingColors = {
-    balanced: '#10b981',
-    high_protein: '#8b5cf6',
-    high_carb: '#f59e0b',
-    high_fat: '#ec4899',
+    balanced:  'var(--accent-green)' ,
+    high_protein:  'var(--accent-violet-bright)' ,
+    high_carb:  'var(--accent-amber)' ,
+    high_fat:  'var(--accent-pink)' ,
   };
 
   return (
@@ -87,10 +87,10 @@ export default function FoodAnalysis() {
         {/* Header */}
         <div className="mb-6">
           <div className="chip mb-2">· COMPUTER VISION ACTIVE</div>
-          <h1 className="font-display font-bold mb-1" style={{ color: '#e8eaff', fontSize: '1.3rem', letterSpacing: '0.08em' }}>
+          <h1 className="font-display font-bold mb-1" style={{ color:  'var(--text-primary)' , fontSize: '1.3rem', letterSpacing: '0.08em' }}>
             FOOD ANALYSIS
           </h1>
-          <p className="text-sm" style={{ color: '#8b90b8' }}>
+          <p className="text-sm" style={{ color:  'var(--text-secondary)'  }}>
             Upload a photo — AI detects food, estimates calories and protein
           </p>
         </div>
@@ -114,16 +114,16 @@ export default function FoodAnalysis() {
                   className="flex items-center justify-center rounded-full mb-5"
                   style={{
                     width: 72, height: 72,
-                    background: 'rgba(124,58,237,0.1)',
-                    border: '2px solid rgba(124,58,237,0.2)',
+                    background: 'rgba(var(--accent-violet-rgb),0.1)',
+                    border: '2px solid rgba(var(--accent-violet-rgb),0.2)',
                   }}
                 >
-                  <Camera size={28} style={{ color: '#8b5cf6' }} />
+                  <Camera size={28} style={{ color:  'var(--accent-violet-bright)'  }} />
                 </div>
-                <div className="font-display font-bold mb-2" style={{ color: '#e8eaff', fontSize: '0.9rem', letterSpacing: '0.08em' }}>
+                <div className="font-display font-bold mb-2" style={{ color:  'var(--text-primary)' , fontSize: '0.9rem', letterSpacing: '0.08em' }}>
                   DROP YOUR MEAL PHOTO
                 </div>
-                <p className="text-sm mb-4" style={{ color: '#8b90b8' }}>
+                <p className="text-sm mb-4" style={{ color:  'var(--text-secondary)'  }}>
                   Snap a photo of your meal and let AI analyze it instantly
                 </p>
                 <button className="btn-primary rounded-lg px-5 py-2.5 text-xs">
@@ -144,11 +144,11 @@ export default function FoodAnalysis() {
               <div
                 className="rounded-lg p-5"
                 style={{
-                  background: 'rgba(13,15,26,0.8)',
-                  border: '1px solid rgba(124,58,237,0.12)',
+                  background: 'rgba(var(--bg-surface-rgb),0.8)',
+                  border: '1px solid rgba(var(--accent-violet-rgb),0.12)',
                 }}
               >
-                <div className="font-display font-bold mb-4" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+                <div className="font-display font-bold mb-4" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
                   HOW IT WORKS
                 </div>
                 <div className="grid grid-cols-3 gap-4">
@@ -162,20 +162,20 @@ export default function FoodAnalysis() {
                         className="flex items-center justify-center rounded-lg mx-auto mb-3"
                         style={{
                           width: 48, height: 48,
-                          background: 'rgba(124,58,237,0.08)',
-                          border: '1px solid rgba(124,58,237,0.15)',
+                          background: 'rgba(var(--accent-violet-rgb),0.08)',
+                          border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
                           fontSize: '1.3rem',
                         }}
                       >
                         {s.icon}
                       </div>
-                      <div className="font-mono-code mb-1" style={{ color: '#8b5cf6', fontSize: '0.55rem' }}>
+                      <div className="font-mono-code mb-1" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.55rem' }}>
                         STEP {s.step}
                       </div>
-                      <div className="font-display font-bold mb-1" style={{ color: '#e8eaff', fontSize: '0.7rem', letterSpacing: '0.05em' }}>
+                      <div className="font-display font-bold mb-1" style={{ color:  'var(--text-primary)' , fontSize: '0.7rem', letterSpacing: '0.05em' }}>
                         {s.title}
                       </div>
-                      <div className="text-xs" style={{ color: '#8b90b8', lineHeight: 1.5 }}>
+                      <div className="text-xs" style={{ color:  'var(--text-secondary)' , lineHeight: 1.5 }}>
                         {s.desc}
                       </div>
                     </div>
@@ -188,11 +188,11 @@ export default function FoodAnalysis() {
             {imageUrl && !analyzing && !result && (
               <div
                 className="rounded-xl overflow-hidden relative"
-                style={{ border: '1px solid rgba(124,58,237,0.2)' }}
+                style={{ border: '1px solid rgba(var(--accent-violet-rgb),0.2)' }}
               >
                 <img src={imageUrl} alt="Food" className="w-full object-cover" style={{ maxHeight: 320 }} />
                 <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.65rem' }}>
+                  <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.65rem' }}>
                     PROCESSING...
                   </div>
                 </div>
@@ -204,8 +204,8 @@ export default function FoodAnalysis() {
               <div
                 className="rounded-xl p-8 flex flex-col items-center"
                 style={{
-                  background: 'rgba(13,15,26,0.9)',
-                  border: '1px solid rgba(124,58,237,0.2)',
+                  background: 'rgba(var(--bg-surface-rgb),0.9)',
+                  border: '1px solid rgba(var(--accent-violet-rgb),0.2)',
                 }}
               >
                 {imageUrl && (
@@ -229,7 +229,7 @@ export default function FoodAnalysis() {
                     <div
                       className="absolute inset-0"
                       style={{
-                        background: 'linear-gradient(180deg, rgba(6,182,212,0.05), transparent, rgba(124,58,237,0.05))',
+                        background: 'linear-gradient(180deg, rgba(var(--accent-cyan-rgb),0.05), transparent, rgba(var(--accent-violet-rgb),0.05))',
                       }}
                     />
                     {/* HUD corners */}
@@ -239,7 +239,7 @@ export default function FoodAnalysis() {
                     <div className="absolute bottom-2 right-2" style={{ width: 14, height: 14, borderBottom: '2px solid #7c3aed', borderRight: '2px solid #7c3aed' }} />
                   </div>
                 )}
-                <div className="font-display font-bold mb-1" style={{ color: '#e8eaff', fontSize: '0.85rem', letterSpacing: '0.1em' }}>
+                <div className="font-display font-bold mb-1" style={{ color:  'var(--text-primary)' , fontSize: '0.85rem', letterSpacing: '0.1em' }}>
                   ANALYZING MEAL...
                 </div>
                 {[
@@ -248,7 +248,7 @@ export default function FoodAnalysis() {
                   'Computing nutrition',
                   'Finalizing analysis',
                 ].map((step, i) => (
-                  <div key={step} className="font-mono-code mt-1" style={{ color: i === 2 ? '#8b5cf6' : '#4a4f72', fontSize: '0.62rem' }}>
+                  <div key={step} className="font-mono-code mt-1" style={{ color: i === 2 ?  'var(--accent-violet-bright)'  :  'var(--text-dim)' , fontSize: '0.62rem' }}>
                     {i <= 2 ? '✓' : '◉'} {step}
                   </div>
                 ))}
@@ -270,9 +270,9 @@ export default function FoodAnalysis() {
                         <div
                           className="rounded px-2 py-0.5"
                           style={{
-                            background: 'rgba(16,185,129,0.2)',
-                            border: '1px solid rgba(16,185,129,0.4)',
-                            color: '#10b981',
+                            background: 'rgba(var(--accent-green-rgb),0.2)',
+                            border: '1px solid rgba(var(--accent-green-rgb),0.4)',
+                            color:  'var(--accent-green)' ,
                             fontFamily: 'JetBrains Mono',
                             fontSize: '0.6rem',
                           }}
@@ -280,7 +280,7 @@ export default function FoodAnalysis() {
                           {result.confidence}% CONFIDENCE
                         </div>
                       </div>
-                      <div className="font-display font-bold mt-1" style={{ color: '#e8eaff', fontSize: '1.1rem' }}>
+                      <div className="font-display font-bold mt-1" style={{ color:  'var(--text-primary)' , fontSize: '1.1rem' }}>
                         {result.name}
                       </div>
                     </div>
@@ -292,24 +292,24 @@ export default function FoodAnalysis() {
                   className="grid grid-cols-4 gap-3 mb-5"
                 >
                   {[
-                    { label: 'CALORIES', value: result.calories, unit: 'kcal', color: '#f59e0b' },
-                    { label: 'PROTEIN', value: result.protein, unit: 'g', color: '#8b5cf6' },
-                    { label: 'CARBS', value: result.carbs, unit: 'g', color: '#06b6d4' },
-                    { label: 'FAT', value: result.fat, unit: 'g', color: '#ec4899' },
+                    { label: 'CALORIES', value: result.calories, unit: 'kcal', color:  'var(--accent-amber)'  },
+                    { label: 'PROTEIN', value: result.protein, unit: 'g', color:  'var(--accent-violet-bright)'  },
+                    { label: 'CARBS', value: result.carbs, unit: 'g', color:  'var(--accent-cyan)'  },
+                    { label: 'FAT', value: result.fat, unit: 'g', color:  'var(--accent-pink)'  },
                   ].map(m => (
                     <div
                       key={m.label}
                       className="rounded-lg p-3 text-center"
                       style={{
-                        background: 'rgba(13,15,26,0.8)',
-                        border: `1px solid ${m.color}20`,
+                        background: 'rgba(var(--bg-surface-rgb),0.8)',
+                        border: `1px solid ${window.themeColor(m.color, 0.2)}`,
                       }}
                     >
                       <div className="font-display font-bold" style={{ color: m.color, fontSize: '1.2rem' }}>
                         {m.value}
                       </div>
                       <div className="font-mono-code" style={{ color: m.color, fontSize: '0.55rem' }}>{m.unit}</div>
-                      <div className="font-mono-code mt-0.5" style={{ color: '#4a4f72', fontSize: '0.52rem' }}>{m.label}</div>
+                      <div className="font-mono-code mt-0.5" style={{ color:  'var(--text-dim)' , fontSize: '0.52rem' }}>{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -318,28 +318,28 @@ export default function FoodAnalysis() {
                 <div
                   className="rounded-lg p-4 mb-4"
                   style={{
-                    background: 'rgba(13,15,26,0.8)',
-                    border: '1px solid rgba(124,58,237,0.12)',
+                    background: 'rgba(var(--bg-surface-rgb),0.8)',
+                    border: '1px solid rgba(var(--accent-violet-rgb),0.12)',
                   }}
                 >
-                  <div className="font-mono-code mb-3" style={{ color: '#4a4f72', fontSize: '0.6rem' }}>
+                  <div className="font-mono-code mb-3" style={{ color:  'var(--text-dim)' , fontSize: '0.6rem' }}>
                     DETECTED ITEMS
                   </div>
                   {result.items.map((item, i) => (
                     <div
                       key={i}
                       className="flex items-center justify-between py-2"
-                      style={{ borderBottom: i < result.items.length - 1 ? '1px solid rgba(124,58,237,0.08)' : 'none' }}
+                      style={{ borderBottom: i < result.items.length - 1 ? '1px solid rgba(var(--accent-violet-rgb),0.08)' : 'none' }}
                     >
                       <div>
-                        <div className="text-sm font-medium" style={{ color: '#e8eaff' }}>{item.name}</div>
-                        <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.58rem' }}>{item.amount}</div>
+                        <div className="text-sm font-medium" style={{ color:  'var(--text-primary)'  }}>{item.name}</div>
+                        <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.58rem' }}>{item.amount}</div>
                       </div>
                       <div className="text-right">
-                        <div className="font-display font-semibold" style={{ color: '#f59e0b', fontSize: '0.85rem' }}>
+                        <div className="font-display font-semibold" style={{ color:  'var(--accent-amber)' , fontSize: '0.85rem' }}>
                           {item.calories} kcal
                         </div>
-                        <div className="font-mono-code" style={{ color: '#8b5cf6', fontSize: '0.58rem' }}>
+                        <div className="font-mono-code" style={{ color:  'var(--accent-violet-bright)' , fontSize: '0.58rem' }}>
                           {item.protein}g protein
                         </div>
                       </div>
@@ -351,7 +351,7 @@ export default function FoodAnalysis() {
                 <div
                   className="rounded-lg p-4 mb-4"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(16,185,129,0.06), rgba(6,182,212,0.04))',
+                    background: 'linear-gradient(135deg, rgba(var(--accent-green-rgb),0.06), rgba(var(--accent-cyan-rgb),0.04))',
                     border: `1px solid ${ratingColors[result.rating]}25`,
                   }}
                 >
@@ -385,11 +385,11 @@ export default function FoodAnalysis() {
             <div
               className="rounded-lg p-5"
               style={{
-                background: 'rgba(13,15,26,0.8)',
-                border: '1px solid rgba(124,58,237,0.15)',
+                background: 'rgba(var(--bg-surface-rgb),0.8)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
               }}
             >
-              <div className="font-display font-bold mb-4" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+              <div className="font-display font-bold mb-4" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
                 TODAY'S NUTRITION
               </div>
               <div className="flex flex-col gap-3">
@@ -404,11 +404,11 @@ export default function FoodAnalysis() {
             <div
               className="rounded-lg p-5"
               style={{
-                background: 'rgba(13,15,26,0.8)',
-                border: '1px solid rgba(124,58,237,0.15)',
+                background: 'rgba(var(--bg-surface-rgb),0.8)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
               }}
             >
-              <div className="font-display font-bold mb-4" style={{ color: '#e8eaff', fontSize: '0.78rem', letterSpacing: '0.08em' }}>
+              <div className="font-display font-bold mb-4" style={{ color:  'var(--text-primary)' , fontSize: '0.78rem', letterSpacing: '0.08em' }}>
                 RECENT MEALS
               </div>
               <div className="flex flex-col gap-2">
@@ -417,18 +417,18 @@ export default function FoodAnalysis() {
                     key={i}
                     className="flex items-center gap-3 rounded p-3"
                     style={{
-                      background: 'rgba(124,58,237,0.05)',
-                      border: '1px solid rgba(124,58,237,0.08)',
+                      background: 'rgba(var(--accent-violet-rgb),0.05)',
+                      border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                     }}
                   >
                     <span style={{ fontSize: '1.2rem' }}>{food.emoji}</span>
                     <div className="flex-1">
-                      <div className="text-xs font-medium" style={{ color: '#e8eaff' }}>{food.name}</div>
-                      <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.58rem' }}>
+                      <div className="text-xs font-medium" style={{ color:  'var(--text-primary)'  }}>{food.name}</div>
+                      <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.58rem' }}>
                         {food.protein}g protein
                       </div>
                     </div>
-                    <div className="font-display font-semibold" style={{ color: '#f59e0b', fontSize: '0.8rem' }}>
+                    <div className="font-display font-semibold" style={{ color:  'var(--accent-amber)' , fontSize: '0.8rem' }}>
                       {food.calories}
                     </div>
                   </div>

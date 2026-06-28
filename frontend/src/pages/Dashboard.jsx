@@ -24,8 +24,8 @@ if (typeof document !== 'undefined' && !document.getElementById(DASH_STYLE_ID)) 
       50%      { opacity:0.75; transform:translate(30%,-30%) scale(1.1); }
     }
     @keyframes dash-ringPulse {
-      0%,100% { filter: drop-shadow(0 0 6px var(--ring-color, rgba(139,92,246,0.4))); }
-      50%     { filter: drop-shadow(0 0 14px var(--ring-color, rgba(139,92,246,0.5))); }
+      0%,100% { filter: drop-shadow(0 0 6px var(--ring-color, rgba(var(--accent-violet-bright-rgb),0.4))); }
+      50%     { filter: drop-shadow(0 0 14px var(--ring-color, rgba(var(--accent-violet-bright-rgb),0.5))); }
     }
   `;
   document.head.appendChild(s);
@@ -40,7 +40,7 @@ function NeuralBackground() {
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-            <circle cx="0.5" cy="0.5" r="0.4" fill="rgba(124,58,237,0.3)" />
+            <circle cx="0.5" cy="0.5" r="0.4" fill="rgba(var(--accent-violet-rgb),0.3)" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
@@ -78,7 +78,7 @@ function AnimatedProgressRing({ percent, size = 104, stroke = 7, color, label, d
           <circle
             cx={size / 2} cy={size / 2} r={radius}
             fill="none"
-            stroke="rgba(124,58,237,0.08)"
+            stroke="rgba(var(--accent-violet-rgb),0.08)"
             strokeWidth={stroke}
           />
           {/* Progress arc */}
@@ -92,7 +92,7 @@ function AnimatedProgressRing({ percent, size = 104, stroke = 7, color, label, d
             strokeDashoffset={offset}
             style={{
               transition: `stroke-dashoffset 1.6s cubic-bezier(0.34, 1.15, 0.64, 1) ${delay}ms`,
-              filter: `drop-shadow(0 0 8px ${color}70)`,
+              filter: `drop-shadow(0 0 8px ${window.themeColor(color, 0.7)})`,
             }}
             transform={`rotate(-90 ${size / 2} ${size / 2})`}
           />
@@ -103,7 +103,7 @@ function AnimatedProgressRing({ percent, size = 104, stroke = 7, color, label, d
           style={{
             fontFamily: "'Orbitron', monospace",
             fontWeight: 700,
-            color: '#e8eaff',
+            color:  'var(--text-primary)' ,
             fontSize: '0.88rem',
             letterSpacing: '0.02em',
           }}
@@ -115,7 +115,7 @@ function AnimatedProgressRing({ percent, size = 104, stroke = 7, color, label, d
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontWeight: 700,
-          color: '#4a4f72',
+          color:  'var(--text-dim)' ,
           fontSize: '0.58rem',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
@@ -146,34 +146,34 @@ function StreakCalendar() {
               borderRadius: 8,
               background: done[i]
                 ? 'linear-gradient(135deg, #7c3aed, #06b6d4)'
-                : 'rgba(124,58,237,0.05)',
+                : 'rgba(var(--accent-violet-rgb),0.05)',
               border: done[i]
-                ? '1px solid rgba(139,92,246,0.35)'
-                : '1px solid rgba(124,58,237,0.08)',
-              boxShadow: done[i] ? '0 0 10px rgba(124,58,237,0.25)' : 'none',
+                ? '1px solid rgba(var(--accent-violet-bright-rgb),0.35)'
+                : '1px solid rgba(var(--accent-violet-rgb),0.08)',
+              boxShadow: done[i] ? '0 0 10px rgba(var(--accent-violet-rgb),0.25)' : 'none',
               transition: 'all 0.25s cubic-bezier(0.23,1,0.32,1)',
               cursor: 'pointer',
             }}
             onMouseEnter={e => {
               if (done[i]) {
                 e.currentTarget.style.transform = 'scale(1.12)';
-                e.currentTarget.style.boxShadow = '0 0 18px rgba(124,58,237,0.45), 0 0 6px rgba(6,182,212,0.3)';
-                e.currentTarget.style.borderColor = 'rgba(139,92,246,0.55)';
+                e.currentTarget.style.boxShadow = '0 0 18px rgba(var(--accent-violet-rgb),0.45), 0 0 6px rgba(var(--accent-cyan-rgb),0.3)';
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-bright-rgb),0.55)';
               } else {
                 e.currentTarget.style.transform = 'scale(1.08)';
-                e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
-                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.2)';
-                e.currentTarget.style.boxShadow = '0 0 8px rgba(124,58,237,0.15)';
+                e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.1)';
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.2)';
+                e.currentTarget.style.boxShadow = '0 0 8px rgba(var(--accent-violet-rgb),0.15)';
               }
             }}
             onMouseLeave={e => {
               e.currentTarget.style.transform = 'scale(1)';
               if (done[i]) {
-                e.currentTarget.style.boxShadow = '0 0 10px rgba(124,58,237,0.25)';
-                e.currentTarget.style.borderColor = 'rgba(139,92,246,0.35)';
+                e.currentTarget.style.boxShadow = '0 0 10px rgba(var(--accent-violet-rgb),0.25)';
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-bright-rgb),0.35)';
               } else {
-                e.currentTarget.style.background = 'rgba(124,58,237,0.05)';
-                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.08)';
+                e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.05)';
+                e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.08)';
                 e.currentTarget.style.boxShadow = 'none';
               }
             }}
@@ -183,7 +183,7 @@ function StreakCalendar() {
           <span
             style={{
               fontFamily: "'JetBrains Mono', monospace",
-              color: done[i] ? '#8b5cf6' : '#3d4168',
+              color: done[i] ?  'var(--accent-violet-bright)'  :  'var(--text-dim)' ,
               fontSize: '0.56rem',
               fontWeight: 700,
               transition: 'color 0.2s ease',
@@ -208,18 +208,18 @@ const CustomTooltip = ({ active, payload, label }) => {
       style={{
         borderRadius: 10,
         padding: '10px 14px',
-        background: 'rgba(11,13,22,0.97)',
-        border: '1px solid rgba(124,58,237,0.18)',
+        background: 'rgba(var(--bg-card-rgb),0.97)',
+        border: '1px solid rgba(var(--accent-violet-rgb),0.18)',
         fontSize: '0.72rem',
         fontFamily: "'JetBrains Mono', monospace",
         boxShadow: '0 8px 28px rgba(0,0,0,0.55)',
         backdropFilter: 'blur(8px)',
       }}
     >
-      <div style={{ color: '#4a4f72', marginBottom: 4, letterSpacing: '0.08em', fontSize: '0.6rem', fontWeight: 700 }}>
+      <div style={{ color:  'var(--text-dim)' , marginBottom: 4, letterSpacing: '0.08em', fontSize: '0.6rem', fontWeight: 700 }}>
         {String(label || '').toUpperCase()}
       </div>
-      <div style={{ color: '#06b6d4', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div style={{ color:  'var(--accent-cyan)' , fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
         <Footprints size={12} />
         {Number(payload[0]?.value ?? 0).toLocaleString()}
       </div>
@@ -232,7 +232,7 @@ const CustomTooltip = ({ active, payload, label }) => {
    — unified card wrapper with staggered entrance,
      accent top bar, and hover lift
 ───────────────────────────────────────────── */
-function DashboardCard({ children, color = '#8b5cf6', style = {}, className = '', delay = 0 }) {
+function DashboardCard({ children, color =  'var(--accent-violet-bright)' , style = {}, className = '', delay = 0 }) {
   const [hovered, setHovered] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -248,12 +248,12 @@ function DashboardCard({ children, color = '#8b5cf6', style = {}, className = ''
       className={`overflow-hidden ${className}`}
       style={{
         borderRadius: 14,
-        background: 'rgba(13,15,26,0.85)',
-        border: `1px solid ${hovered ? color + '35' : 'rgba(124,58,237,0.08)'}`,
+        background: 'rgba(var(--bg-surface-rgb),0.85)',
+        border: `1px solid ${hovered ? color + '35' : 'rgba(var(--accent-violet-rgb),0.08)'}`,
         transform: `translateY(${hovered ? '-2px' : mounted ? '0' : '12px'})`,
         opacity: mounted ? 1 : 0,
         boxShadow: hovered
-          ? `0 16px 36px -10px ${color}18, 0 0 0 1px ${color}08`
+          ? `0 16px 36px -10px ${window.themeColor(color, 0.18)}, 0 0 0 1px ${window.themeColor(color, 0.08)}`
           : '0 2px 12px rgba(0,0,0,0.2)',
         position: 'relative',
         transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
@@ -264,7 +264,7 @@ function DashboardCard({ children, color = '#8b5cf6', style = {}, className = ''
       <div
         style={{
           height: 2,
-          background: `linear-gradient(90deg, ${color}, ${color}80)`,
+          background: `linear-gradient(90deg, ${color}, ${window.themeColor(color, 0.5)})`,
           opacity: hovered ? 0.9 : 0.4,
           transition: 'opacity 0.4s ease',
         }}
@@ -296,8 +296,8 @@ export default function Dashboard({ onNavigate }) {
         <div
           className="relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.04))',
-            borderBottom: '1px solid rgba(124,58,237,0.08)',
+            background: 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.08), rgba(var(--accent-cyan-rgb),0.04))',
+            borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.08)',
             padding: '48px 40px 40px',
             marginBottom: 0,
           }}
@@ -306,7 +306,7 @@ export default function Dashboard({ onNavigate }) {
           <div
             className="absolute right-0 top-0 w-80 h-full pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at right, rgba(6,182,212,0.08), transparent 70%)',
+              background: 'radial-gradient(ellipse at right, rgba(var(--accent-cyan-rgb),0.08), transparent 70%)',
             }}
           />
 
@@ -350,7 +350,7 @@ export default function Dashboard({ onNavigate }) {
               <h1
                 className="font-display font-bold mb-3"
                 style={{
-                  color: '#e8eaff',
+                  color:  'var(--text-primary)' ,
                   fontSize: '2.2rem',
                   letterSpacing: '0.02em',
                   lineHeight: 1.12,
@@ -363,7 +363,7 @@ export default function Dashboard({ onNavigate }) {
               </h1>
               <p
                 style={{
-                  color: '#8b90b8',
+                  color:  'var(--text-secondary)' ,
                   maxWidth: '460px',
                   fontWeight: 400,
                   fontSize: '0.9rem',
@@ -386,21 +386,21 @@ export default function Dashboard({ onNavigate }) {
                 <AnimatedProgressRing
                   percent={(today.steps / today.stepsGoal) * 100}
                   size={104} stroke={7}
-                  color="#06b6d4"
+                  color= "var(--accent-cyan)" 
                   label="STEPS"
                   delay={0}
                 />
                 <AnimatedProgressRing
                   percent={workoutPercent}
                   size={104} stroke={7}
-                  color="#8b5cf6"
+                  color= "var(--accent-violet-bright)" 
                   label="WORKOUTS"
                   delay={140}
                 />
                 <AnimatedProgressRing
                   percent={(today.calories / today.caloriesGoal) * 100}
                   size={104} stroke={7}
-                  color="#10b981"
+                  color= "var(--accent-green)" 
                   label="CALORIES"
                   delay={280}
                 />
@@ -495,7 +495,7 @@ export default function Dashboard({ onNavigate }) {
             <div className="flex flex-col" style={{ gap: 28 }}>
 
               {/* Step Activity — histogram bar chart */}
-              <DashboardCard color="#06b6d4" delay={200}>
+              <DashboardCard color= "var(--accent-cyan)"  delay={200}>
                 <SectionHeader
                   title="STEP ACTIVITY"
                   subtitle="Last 7 days"
@@ -510,7 +510,7 @@ export default function Dashboard({ onNavigate }) {
                       barCategoryGap="28%"
                     >
                       <CartesianGrid
-                        stroke="rgba(124,58,237,0.04)"
+                        stroke="rgba(var(--accent-violet-rgb),0.04)"
                         vertical={false}
                         strokeDasharray="4 4"
                       />
@@ -518,17 +518,17 @@ export default function Dashboard({ onNavigate }) {
                         dataKey="day"
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#3d4168', fontSize: 10.5, fontFamily: 'JetBrains Mono' }}
+                        tick={{ fill:  'var(--text-dim)' , fontSize: 10.5, fontFamily: 'JetBrains Mono' }}
                         dy={8}
                       />
                       <YAxis
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#3d4168', fontSize: 10.5, fontFamily: 'JetBrains Mono' }}
+                        tick={{ fill:  'var(--text-dim)' , fontSize: 10.5, fontFamily: 'JetBrains Mono' }}
                       />
                       <Tooltip
                         content={<CustomTooltip />}
-                        cursor={{ fill: 'rgba(6,182,212,0.03)', radius: 4 }}
+                        cursor={{ fill: 'rgba(var(--accent-cyan-rgb),0.03)', radius: 4 }}
                       />
                       <Bar
                         dataKey="value"
@@ -540,7 +540,7 @@ export default function Dashboard({ onNavigate }) {
                         {progressData.steps.map((entry, index) => (
                           <Cell
                             key={`cell-${index}`}
-                            fill={entry.value >= today.stepsGoal ? '#06b6d4' : '#1a3f4d'}
+                            fill={entry.value >= today.stepsGoal ?  'var(--accent-cyan)'  : '#1a3f4d'}
                             fillOpacity={0.88}
                           />
                         ))}
@@ -554,7 +554,7 @@ export default function Dashboard({ onNavigate }) {
               <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: 28 }}>
 
                 {/* Last Workout */}
-                <DashboardCard color="#8b5cf6" delay={280}>
+                <DashboardCard color= "var(--accent-violet-bright)"  delay={280}>
                   <SectionHeader title="LAST WORKOUT" badge="· COMPLETED" />
                   {(() => {
                     const w = workoutHistory[0];
@@ -563,7 +563,7 @@ export default function Dashboard({ onNavigate }) {
                         <div
                           className="font-display font-bold"
                           style={{
-                            color: '#e8eaff',
+                            color:  'var(--text-primary)' ,
                             fontSize: '1.05rem',
                             letterSpacing: '0.06em',
                             marginBottom: 14,
@@ -581,8 +581,8 @@ export default function Dashboard({ onNavigate }) {
                             marginBottom: 20,
                             padding: 16,
                             borderRadius: 10,
-                            background: 'rgba(124,58,237,0.05)',
-                            border: '1px solid rgba(124,58,237,0.08)',
+                            background: 'rgba(var(--accent-violet-rgb),0.05)',
+                            border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                           }}
                         >
                           {[
@@ -595,7 +595,7 @@ export default function Dashboard({ onNavigate }) {
                               <div
                                 style={{
                                   fontFamily: "'JetBrains Mono', monospace",
-                                  color: '#3d4168',
+                                  color:  'var(--text-dim)' ,
                                   fontSize: '0.58rem',
                                   fontWeight: 700,
                                   letterSpacing: '0.1em',
@@ -606,7 +606,7 @@ export default function Dashboard({ onNavigate }) {
                               </div>
                               <div
                                 className="font-display font-semibold"
-                                style={{ color: '#e8eaff', fontSize: '0.98rem' }}
+                                style={{ color:  'var(--text-primary)' , fontSize: '0.98rem' }}
                               >
                                 {stat.value}
                               </div>
@@ -618,8 +618,8 @@ export default function Dashboard({ onNavigate }) {
                           style={{ borderRadius: 10, padding: '10px 16px' }}
                           onClick={() => onNavigate('history')}
                           onMouseEnter={e => {
-                            e.currentTarget.style.background = 'rgba(124,58,237,0.08)';
-                            e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)';
+                            e.currentTarget.style.background = 'rgba(var(--accent-violet-rgb),0.08)';
+                            e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-bright-rgb),0.3)';
                           }}
                           onMouseLeave={e => {
                             e.currentTarget.style.background = 'transparent';
@@ -634,12 +634,12 @@ export default function Dashboard({ onNavigate }) {
                 </DashboardCard>
 
                 {/* AI Insight */}
-                <DashboardCard color="#7c3aed" delay={360} className="relative overflow-hidden">
+                <DashboardCard color= "var(--accent-violet)"  delay={360} className="relative overflow-hidden">
                   {/* Ambient glow */}
                   <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
-                      background: 'radial-gradient(ellipse at top right, rgba(6,182,212,0.1), transparent 65%)',
+                      background: 'radial-gradient(ellipse at top right, rgba(var(--accent-cyan-rgb),0.1), transparent 65%)',
                     }}
                   />
                   <div
@@ -647,7 +647,7 @@ export default function Dashboard({ onNavigate }) {
                     style={{
                       width: 100,
                       height: 100,
-                      background: 'radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(var(--accent-cyan-rgb),0.2) 0%, transparent 70%)',
                       filter: 'blur(14px)',
                       animation: 'dash-pulseGlow 3.5s infinite ease-in-out',
                       transform: 'translate(30%, -30%)',
@@ -663,7 +663,7 @@ export default function Dashboard({ onNavigate }) {
                           height: 38,
                           borderRadius: 10,
                           background: 'linear-gradient(135deg, #7c3aed, #06b6d4)',
-                          boxShadow: '0 0 16px rgba(124,58,237,0.4)',
+                          boxShadow: '0 0 16px rgba(var(--accent-violet-rgb),0.4)',
                         }}
                       >
                         <Brain size={18} color="white" />
@@ -672,7 +672,7 @@ export default function Dashboard({ onNavigate }) {
                         <div
                           style={{
                             fontFamily: "'JetBrains Mono', monospace",
-                            color: '#8b5cf6',
+                            color:  'var(--accent-violet-bright)' ,
                             fontSize: '0.65rem',
                             fontWeight: 800,
                             letterSpacing: '0.08em',
@@ -683,7 +683,7 @@ export default function Dashboard({ onNavigate }) {
                         <div
                           style={{
                             fontFamily: "'JetBrains Mono', monospace",
-                            color: '#3d4168',
+                            color:  'var(--text-dim)' ,
                             fontSize: '0.55rem',
                             fontWeight: 700,
                             letterSpacing: '0.06em',
@@ -695,7 +695,7 @@ export default function Dashboard({ onNavigate }) {
                       </div>
                     </div>
 
-                    <p style={{ color: '#8b90b8', lineHeight: 1.7, fontSize: '0.85rem', marginBottom: 20 }}>
+                    <p style={{ color:  'var(--text-secondary)' , lineHeight: 1.7, fontSize: '0.85rem', marginBottom: 20 }}>
                       Your push-up form score dropped 7 pts vs last week. Focus on keeping your core tight and hands shoulder-width apart.
                     </p>
 
@@ -704,15 +704,15 @@ export default function Dashboard({ onNavigate }) {
                         padding: 14,
                         borderRadius: 10,
                         marginBottom: 20,
-                        background: 'rgba(6,182,212,0.06)',
-                        border: '1px solid rgba(6,182,212,0.12)',
+                        background: 'rgba(var(--accent-cyan-rgb),0.06)',
+                        border: '1px solid rgba(var(--accent-cyan-rgb),0.12)',
                       }}
                     >
                       <div
                         className="flex items-center gap-2"
                         style={{
                           fontFamily: "'JetBrains Mono', monospace",
-                          color: '#06b6d4',
+                          color:  'var(--accent-cyan)' ,
                           fontSize: '0.58rem',
                           fontWeight: 800,
                           letterSpacing: '0.08em',
@@ -722,7 +722,7 @@ export default function Dashboard({ onNavigate }) {
                         <TrendingUp size={11} />
                         TODAY'S RECOMMENDATION
                       </div>
-                      <div style={{ color: '#e8eaff', lineHeight: 1.55, fontSize: '0.82rem' }}>
+                      <div style={{ color:  'var(--text-primary)' , lineHeight: 1.55, fontSize: '0.82rem' }}>
                         Add 30g protein from dinner · 1,600 more steps to hit goal
                       </div>
                     </div>
@@ -732,8 +732,8 @@ export default function Dashboard({ onNavigate }) {
                       style={{ borderRadius: 10, padding: '10px 16px' }}
                       onClick={() => onNavigate('coach')}
                       onMouseEnter={e => {
-                        e.currentTarget.style.background = 'rgba(6,182,212,0.08)';
-                        e.currentTarget.style.borderColor = 'rgba(6,182,212,0.25)';
+                        e.currentTarget.style.background = 'rgba(var(--accent-cyan-rgb),0.08)';
+                        e.currentTarget.style.borderColor = 'rgba(var(--accent-cyan-rgb),0.25)';
                       }}
                       onMouseLeave={e => {
                         e.currentTarget.style.background = 'transparent';
@@ -751,7 +751,7 @@ export default function Dashboard({ onNavigate }) {
             <div className="flex flex-col" style={{ gap: 28 }}>
 
               {/* Today's Goals — Protein removed */}
-              <DashboardCard color="#10b981" delay={320}>
+              <DashboardCard color= "var(--accent-green)"  delay={320}>
                 <SectionHeader title="TODAY'S GOALS" badge="· LIVE" />
                 <div className="flex flex-col" style={{ gap: 22, marginTop: 18 }}>
                   {goals
@@ -763,7 +763,7 @@ export default function Dashboard({ onNavigate }) {
                             style={{
                               fontSize: '0.68rem',
                               fontWeight: 700,
-                              color: '#8b90b8',
+                              color:  'var(--text-secondary)' ,
                               letterSpacing: '0.08em',
                               fontFamily: "'Inter', sans-serif",
                             }}
@@ -773,7 +773,7 @@ export default function Dashboard({ onNavigate }) {
                           <span
                             style={{
                               fontFamily: "'JetBrains Mono', monospace",
-                              color: '#e8eaff',
+                              color:  'var(--text-primary)' ,
                               fontSize: '0.75rem',
                               fontWeight: 700,
                             }}
@@ -791,14 +791,14 @@ export default function Dashboard({ onNavigate }) {
               </DashboardCard>
 
               {/* Quick Start */}
-              <DashboardCard color="#8b5cf6" delay={420}>
+              <DashboardCard color= "var(--accent-violet-bright)"  delay={420}>
                 <SectionHeader title="QUICK START" />
                 <div className="flex flex-col" style={{ gap: 10, marginTop: 18 }}>
                   {[
-                    { label: 'Start Workout', sub: 'AI form analysis', color: '#8b5cf6', page: 'workout',  icon: Dumbbell },
-                    { label: 'Log Meal',      sub: 'Photo analysis',   color: '#10b981', page: 'food',     icon: Camera },
-                    { label: 'AI Coach',      sub: 'Get guidance',     color: '#06b6d4', page: 'coach',    icon: Bot },
-                    { label: 'Log Progress',  sub: 'Steps & weight',   color: '#f59e0b', page: 'progress', icon: BarChart2 },
+                    { label: 'Start Workout', sub: 'AI form analysis', color:  'var(--accent-violet-bright)' , page: 'workout',  icon: Dumbbell },
+                    { label: 'Log Meal',      sub: 'Photo analysis',   color:  'var(--accent-green)' , page: 'food',     icon: Camera },
+                    { label: 'AI Coach',      sub: 'Get guidance',     color:  'var(--accent-cyan)' , page: 'coach',    icon: Bot },
+                    { label: 'Log Progress',  sub: 'Steps & weight',   color:  'var(--accent-amber)' , page: 'progress', icon: BarChart2 },
                   ].map(item => (
                     <button
                       key={item.page}
@@ -809,19 +809,19 @@ export default function Dashboard({ onNavigate }) {
                         padding: '12px 14px',
                         borderRadius: 10,
                         background: 'rgba(255,255,255,0.015)',
-                        border: '1px solid rgba(124,58,237,0.08)',
+                        border: '1px solid rgba(var(--accent-violet-rgb),0.08)',
                         width: '100%',
                         cursor: 'pointer',
                         transition: 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
                       }}
                       onMouseEnter={e => {
-                        e.currentTarget.style.borderColor = `${item.color}40`;
-                        e.currentTarget.style.background = `${item.color}08`;
+                        e.currentTarget.style.borderColor = `${window.themeColor(item.color, 0.4)}`;
+                        e.currentTarget.style.background = `${window.themeColor(item.color, 0.08)}`;
                         e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = `0 8px 24px -6px ${item.color}25`;
+                        e.currentTarget.style.boxShadow = `0 8px 24px -6px ${window.themeColor(item.color, 0.25)}`;
                       }}
                       onMouseLeave={e => {
-                        e.currentTarget.style.borderColor = 'rgba(124,58,237,0.08)';
+                        e.currentTarget.style.borderColor = 'rgba(var(--accent-violet-rgb),0.08)';
                         e.currentTarget.style.background = 'rgba(255,255,255,0.015)';
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = 'none';
@@ -834,8 +834,8 @@ export default function Dashboard({ onNavigate }) {
                           width: 38,
                           height: 38,
                           borderRadius: 9,
-                          background: `${item.color}10`,
-                          border: `1px solid ${item.color}20`,
+                          background: `${window.themeColor(item.color, 0.1)}`,
+                          border: `1px solid ${window.themeColor(item.color, 0.2)}`,
                           transition: 'all 0.3s ease',
                         }}
                       >
@@ -847,7 +847,7 @@ export default function Dashboard({ onNavigate }) {
                         <div
                           className="font-display font-bold"
                           style={{
-                            color: '#e8eaff',
+                            color:  'var(--text-primary)' ,
                             fontSize: '0.78rem',
                             letterSpacing: '0.05em',
                             lineHeight: 1.3,
@@ -856,7 +856,7 @@ export default function Dashboard({ onNavigate }) {
                           {item.label.toUpperCase()}
                         </div>
                         <div
-                          style={{ color: '#8b90b8', fontSize: '0.72rem', marginTop: 2 }}
+                          style={{ color:  'var(--text-secondary)' , fontSize: '0.72rem', marginTop: 2 }}
                         >
                           {item.sub}
                         </div>

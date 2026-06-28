@@ -3,11 +3,11 @@
 // Stat Card
 export function StatCard({ label, value, unit, sublabel, color = 'violet', icon: Icon, trend }) {
   const colors = {
-    violet: { accent: '#8b5cf6', glow: 'rgba(124, 58, 237, 0.15)', border: 'rgba(124, 58, 237, 0.15)', hoverBorder: 'rgba(139, 92, 246, 0.35)' },
-    cyan: { accent: '#06b6d4', glow: 'rgba(6, 182, 212, 0.12)', border: 'rgba(6, 182, 212, 0.15)', hoverBorder: 'rgba(6, 182, 212, 0.35)' },
-    green: { accent: '#10b981', glow: 'rgba(16, 185, 129, 0.12)', border: 'rgba(16, 185, 129, 0.15)', hoverBorder: 'rgba(16, 185, 129, 0.35)' },
-    amber: { accent: '#f59e0b', glow: 'rgba(245, 158, 11, 0.12)', border: 'rgba(245, 158, 11, 0.15)', hoverBorder: 'rgba(245, 158, 11, 0.35)' },
-    pink: { accent: '#ec4899', glow: 'rgba(236, 72, 153, 0.12)', border: 'rgba(236, 72, 153, 0.15)', hoverBorder: 'rgba(236, 72, 153, 0.35)' },
+    violet: { accent:  'var(--accent-violet-bright)' , glow: 'rgba(var(--accent-violet-rgb), 0.15)', border: 'rgba(var(--accent-violet-rgb), 0.15)', hoverBorder: 'rgba(var(--accent-violet-bright-rgb), 0.35)' },
+    cyan: { accent:  'var(--accent-cyan)' , glow: 'rgba(var(--accent-cyan-rgb), 0.12)', border: 'rgba(var(--accent-cyan-rgb), 0.15)', hoverBorder: 'rgba(var(--accent-cyan-rgb), 0.35)' },
+    green: { accent:  'var(--accent-green)' , glow: 'rgba(var(--accent-green-rgb), 0.12)', border: 'rgba(var(--accent-green-rgb), 0.15)', hoverBorder: 'rgba(var(--accent-green-rgb), 0.35)' },
+    amber: { accent:  'var(--accent-amber)' , glow: 'rgba(var(--accent-amber-rgb), 0.12)', border: 'rgba(var(--accent-amber-rgb), 0.15)', hoverBorder: 'rgba(var(--accent-amber-rgb), 0.35)' },
+    pink: { accent:  'var(--accent-pink)' , glow: 'rgba(var(--accent-pink-rgb), 0.12)', border: 'rgba(var(--accent-pink-rgb), 0.15)', hoverBorder: 'rgba(var(--accent-pink-rgb), 0.35)' },
   };
   const c = colors[color] || colors.violet;
 
@@ -16,7 +16,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
       className="relative overflow-hidden"
       style={{
         borderRadius: 12,
-        background: 'rgba(13, 15, 26, 0.85)',
+        background: 'rgba(var(--bg-surface-rgb), 0.85)',
         border: `1px solid ${c.border}`,
         backdropFilter: 'blur(12px)',
         transition: 'all 0.3s cubic-bezier(0.23,1,0.32,1)',
@@ -36,7 +36,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
       {/* Accent top bar */}
       <div style={{
         height: 2,
-        background: `linear-gradient(90deg, ${c.accent}, ${c.accent}60)`,
+        background: `linear-gradient(90deg, ${c.accent}, ${window.themeColor(c.accent, 0.6)})`,
         opacity: 0.6,
       }} />
       {/* Ambient glow */}
@@ -50,7 +50,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
           <span
             style={{
               fontFamily: "'JetBrains Mono', monospace",
-              color: '#8b90b8',
+              color:  'var(--text-secondary)' ,
               fontSize: '0.56rem',
               fontWeight: 700,
               letterSpacing: '0.12em',
@@ -66,8 +66,8 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
                 width: 30,
                 height: 30,
                 borderRadius: 8,
-                background: `${c.accent}12`,
-                border: `1px solid ${c.accent}20`,
+                background: `${window.themeColor(c.accent, 0.12)}`,
+                border: `1px solid ${window.themeColor(c.accent, 0.2)}`,
               }}
             >
               <Icon size={15} style={{ color: c.accent }} />
@@ -81,7 +81,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
               fontFamily: "'Orbitron', monospace",
               fontSize: '1.65rem',
               fontWeight: 700,
-              color: '#e8eaff',
+              color:  'var(--text-primary)' ,
               lineHeight: 1,
             }}
           >
@@ -104,7 +104,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
         {sublabel && (
           <div
             style={{
-              color: '#8b90b8',
+              color:  'var(--text-secondary)' ,
               fontSize: '0.72rem',
               marginTop: 6,
               fontFamily: "'Inter', sans-serif",
@@ -118,7 +118,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
           <div
             style={{
               fontFamily: "'JetBrains Mono', monospace",
-              color: trend.positive ? '#10b981' : '#ec4899',
+              color: trend.positive ?  'var(--accent-green)'  :  'var(--accent-pink)' ,
               fontSize: '0.6rem',
               fontWeight: 700,
               marginTop: 6,
@@ -134,7 +134,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
               width: 16,
               height: 16,
               borderRadius: 4,
-              background: trend.positive ? 'rgba(16,185,129,0.1)' : 'rgba(236,72,153,0.1)',
+              background: trend.positive ? 'rgba(var(--accent-green-rgb),0.1)' : 'rgba(var(--accent-pink-rgb),0.1)',
               fontSize: '0.55rem',
             }}>
               {trend.positive ? '▲' : '▼'}
@@ -149,7 +149,7 @@ export function StatCard({ label, value, unit, sublabel, color = 'violet', icon:
 
 
 // Progress Ring (SVG)
-export function ProgressRing({ percent, size = 80, stroke = 5, color = '#8b5cf6', label, value }) {
+export function ProgressRing({ percent, size = 80, stroke = 5, color =  'var(--accent-violet-bright)' , label, value }) {
   const radius = (size - stroke) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (percent / 100) * circumference;
@@ -163,7 +163,7 @@ export function ProgressRing({ percent, size = 80, stroke = 5, color = '#8b5cf6'
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="rgba(124, 58, 237, 0.1)"
+            stroke="rgba(var(--accent-violet-rgb), 0.1)"
             strokeWidth={stroke}
           />
           <circle
@@ -176,20 +176,20 @@ export function ProgressRing({ percent, size = 80, stroke = 5, color = '#8b5cf6'
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"
-            style={{ transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1)', filter: `drop-shadow(0 0 4px ${color}60)` }}
+            style={{ transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1)', filter: `drop-shadow(0 0 4px ${window.themeColor(color, 0.6)})` }}
           />
         </svg>
         <div
           className="absolute inset-0 flex flex-col items-center justify-center"
           style={{ fontSize: '0.95rem' }}
         >
-          <span className="stat-number" style={{ color: '#e8eaff', fontSize: '1rem' }}>
+          <span className="stat-number" style={{ color:  'var(--text-primary)' , fontSize: '1rem' }}>
             {value}
           </span>
         </div>
       </div>
       {label && (
-        <div className="text-xs mt-1.5 text-center" style={{ color: '#8b90b8', fontFamily: 'JetBrains Mono', fontSize: '0.6rem' }}>
+        <div className="text-xs mt-1.5 text-center" style={{ color:  'var(--text-secondary)' , fontFamily: 'JetBrains Mono', fontSize: '0.6rem' }}>
           {label}
         </div>
       )}
@@ -212,15 +212,15 @@ export function ProgressBar({ value, max, color = 'violet', height = 4, showLabe
     <div>
       {showLabel && (
         <div className="flex justify-between items-center mb-1">
-          <span className="text-xs" style={{ color: '#8b90b8' }}>{label}</span>
-          <span className="text-xs font-mono-code" style={{ color: '#e8eaff', fontSize: '0.65rem' }}>
+          <span className="text-xs" style={{ color:  'var(--text-secondary)'  }}>{label}</span>
+          <span className="text-xs font-mono-code" style={{ color:  'var(--text-primary)' , fontSize: '0.65rem' }}>
             {value} / {max}
           </span>
         </div>
       )}
       <div
         className="rounded-full overflow-hidden"
-        style={{ height, background: 'rgba(124, 58, 237, 0.1)' }}
+        style={{ height, background: 'rgba(var(--accent-violet-rgb), 0.1)' }}
       >
         <div
           className="h-full rounded-full"
@@ -228,7 +228,7 @@ export function ProgressBar({ value, max, color = 'violet', height = 4, showLabe
             width: `${pct}%`,
             background: fills[color] || fills.violet,
             transition: 'width 0.6s cubic-bezier(0.4,0,0.2,1)',
-            boxShadow: pct > 0 ? `0 0 8px ${color === 'cyan' ? 'rgba(6,182,212,0.4)' : 'rgba(124,58,237,0.4)'}` : 'none',
+            boxShadow: pct > 0 ? `0 0 8px ${color === 'cyan' ? 'rgba(var(--accent-cyan-rgb),0.4)' : 'rgba(var(--accent-violet-rgb),0.4)'}` : 'none',
           }}
         />
       </div>
@@ -246,12 +246,12 @@ export function SectionHeader({ title, subtitle, badge, action }) {
         )}
         <h2
           className="font-display font-bold"
-          style={{ color: '#e8eaff', letterSpacing: '0.08em', fontSize: '0.9rem' }}
+          style={{ color:  'var(--text-primary)' , letterSpacing: '0.08em', fontSize: '0.9rem' }}
         >
           {title}
         </h2>
         {subtitle && (
-          <p className="text-xs mt-0.5" style={{ color: '#8b90b8' }}>{subtitle}</p>
+          <p className="text-xs mt-0.5" style={{ color:  'var(--text-secondary)'  }}>{subtitle}</p>
         )}
       </div>
       {action && (
@@ -269,14 +269,14 @@ export function SectionHeader({ title, subtitle, badge, action }) {
 // Workout tag badge
 export function WorkoutTag({ tag }) {
   const tagColors = {
-    strength: { bg: 'rgba(124, 58, 237, 0.1)', border: 'rgba(124, 58, 237, 0.25)', color: '#8b5cf6' },
-    cardio: { bg: 'rgba(6, 182, 212, 0.1)', border: 'rgba(6, 182, 212, 0.25)', color: '#06b6d4' },
-    hiit: { bg: 'rgba(236, 72, 153, 0.1)', border: 'rgba(236, 72, 153, 0.25)', color: '#ec4899' },
-    legs: { bg: 'rgba(245, 158, 11, 0.1)', border: 'rgba(245, 158, 11, 0.25)', color: '#f59e0b' },
-    core: { bg: 'rgba(16, 185, 129, 0.1)', border: 'rgba(16, 185, 129, 0.25)', color: '#10b981' },
-    upper: { bg: 'rgba(124, 58, 237, 0.1)', border: 'rgba(124, 58, 237, 0.25)', color: '#8b5cf6' },
-    push: { bg: 'rgba(6, 182, 212, 0.1)', border: 'rgba(6, 182, 212, 0.25)', color: '#06b6d4' },
-    mobility: { bg: 'rgba(16, 185, 129, 0.1)', border: 'rgba(16, 185, 129, 0.25)', color: '#10b981' },
+    strength: { bg: 'rgba(var(--accent-violet-rgb), 0.1)', border: 'rgba(var(--accent-violet-rgb), 0.25)', color:  'var(--accent-violet-bright)'  },
+    cardio: { bg: 'rgba(var(--accent-cyan-rgb), 0.1)', border: 'rgba(var(--accent-cyan-rgb), 0.25)', color:  'var(--accent-cyan)'  },
+    hiit: { bg: 'rgba(var(--accent-pink-rgb), 0.1)', border: 'rgba(var(--accent-pink-rgb), 0.25)', color:  'var(--accent-pink)'  },
+    legs: { bg: 'rgba(var(--accent-amber-rgb), 0.1)', border: 'rgba(var(--accent-amber-rgb), 0.25)', color:  'var(--accent-amber)'  },
+    core: { bg: 'rgba(var(--accent-green-rgb), 0.1)', border: 'rgba(var(--accent-green-rgb), 0.25)', color:  'var(--accent-green)'  },
+    upper: { bg: 'rgba(var(--accent-violet-rgb), 0.1)', border: 'rgba(var(--accent-violet-rgb), 0.25)', color:  'var(--accent-violet-bright)'  },
+    push: { bg: 'rgba(var(--accent-cyan-rgb), 0.1)', border: 'rgba(var(--accent-cyan-rgb), 0.25)', color:  'var(--accent-cyan)'  },
+    mobility: { bg: 'rgba(var(--accent-green-rgb), 0.1)', border: 'rgba(var(--accent-green-rgb), 0.25)', color:  'var(--accent-green)'  },
   };
   const c = tagColors[tag] || tagColors.strength;
   return (
@@ -297,7 +297,7 @@ export function WorkoutTag({ tag }) {
 
 // Form Score Badge
 export function FormScore({ score }) {
-  const color = score >= 90 ? '#10b981' : score >= 75 ? '#06b6d4' : '#f59e0b';
+  const color = score >= 90 ?  'var(--accent-green)'  : score >= 75 ?  'var(--accent-cyan)'  :  'var(--accent-amber)' ;
   const label = score >= 90 ? 'EXCELLENT' : score >= 75 ? 'GOOD' : 'NEEDS WORK';
   return (
     <div className="flex items-center gap-2">
@@ -309,7 +309,7 @@ export function FormScore({ score }) {
       </div>
       <div>
         <div className="font-mono-code" style={{ color, fontSize: '0.6rem' }}>{label}</div>
-        <div style={{ color: '#4a4f72', fontSize: '0.6rem', fontFamily: 'JetBrains Mono' }}>FORM SCORE</div>
+        <div style={{ color:  'var(--text-dim)' , fontSize: '0.6rem', fontFamily: 'JetBrains Mono' }}>FORM SCORE</div>
       </div>
     </div>
   );

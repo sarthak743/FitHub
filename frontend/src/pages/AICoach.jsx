@@ -22,10 +22,10 @@ function MessageBubble({ msg }) {
               ? 'rgba(239,68,68,0.15)'
               : 'linear-gradient(135deg, #0891b2, #06b6d4)',
           boxShadow: isUser
-            ? '0 0 10px rgba(124,58,237,0.25)'
+            ? '0 0 10px rgba(var(--accent-violet-rgb),0.25)'
             : isError
               ? 'none'
-              : '0 0 10px rgba(6,182,212,0.22)',
+              : '0 0 10px rgba(var(--accent-cyan-rgb),0.22)',
           flexShrink: 0,
           alignSelf: 'flex-start',
           marginTop: 2,
@@ -47,15 +47,15 @@ function MessageBubble({ msg }) {
           padding: '12px 16px',
           borderRadius: isUser ? '14px 4px 14px 14px' : '4px 14px 14px 14px',
           background: isUser
-            ? 'linear-gradient(135deg, rgba(124,58,237,0.22), rgba(139,92,246,0.14))'
+            ? 'linear-gradient(135deg, rgba(var(--accent-violet-rgb),0.22), rgba(var(--accent-violet-bright-rgb),0.14))'
             : isError
               ? 'rgba(239,68,68,0.07)'
               : 'rgba(13,20,40,0.85)',
           border: isUser
-            ? '1px solid rgba(139,92,246,0.28)'
+            ? '1px solid rgba(var(--accent-violet-bright-rgb),0.28)'
             : isError
               ? '1px solid rgba(239,68,68,0.2)'
-              : '1px solid rgba(6,182,212,0.12)',
+              : '1px solid rgba(var(--accent-cyan-rgb),0.12)',
         }}
       >
         {!isUser && !isError && (
@@ -66,9 +66,9 @@ function MessageBubble({ msg }) {
               fontFamily: 'Orbitron',
               fontWeight: 700,
               letterSpacing: '0.12em',
-              color: '#06b6d4',
-              background: 'rgba(6,182,212,0.08)',
-              border: '1px solid rgba(6,182,212,0.18)',
+              color:  'var(--accent-cyan)' ,
+              background: 'rgba(var(--accent-cyan-rgb),0.08)',
+              border: '1px solid rgba(var(--accent-cyan-rgb),0.18)',
               padding: '2px 7px',
               borderRadius: 3,
             }}
@@ -111,7 +111,7 @@ function TypingIndicator() {
         style={{
           width: 30, height: 30,
           background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
-          boxShadow: '0 0 10px rgba(6,182,212,0.22)',
+          boxShadow: '0 0 10px rgba(var(--accent-cyan-rgb),0.22)',
           marginTop: 2,
         }}
       >
@@ -122,7 +122,7 @@ function TypingIndicator() {
           padding: '14px 18px',
           borderRadius: '4px 14px 14px 14px',
           background: 'rgba(13,20,40,0.85)',
-          border: '1px solid rgba(6,182,212,0.12)',
+          border: '1px solid rgba(var(--accent-cyan-rgb),0.12)',
           display: 'flex',
           alignItems: 'center',
           gap: 5,
@@ -134,7 +134,7 @@ function TypingIndicator() {
             style={{
               width: 5, height: 5,
               borderRadius: '50%',
-              background: '#06b6d4',
+              background:  'var(--accent-cyan)' ,
               animation: `typingDot 1.1s ease-in-out ${i * 0.18}s infinite`,
             }}
           />
@@ -260,8 +260,8 @@ export default function AICoach() {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         .chip-btn {
-          background: rgba(124,58,237,0.06);
-          border: 1px solid rgba(124,58,237,0.14);
+          background: rgba(var(--accent-violet-rgb),0.06);
+          border: 1px solid rgba(var(--accent-violet-rgb),0.14);
           color: #7a80a8;
           font-family: Inter, sans-serif;
           font-size: 0.72rem;
@@ -272,13 +272,13 @@ export default function AICoach() {
           white-space: nowrap;
         }
         .chip-btn:hover {
-          background: rgba(124,58,237,0.13);
-          border-color: rgba(139,92,246,0.38);
+          background: rgba(var(--accent-violet-rgb),0.13);
+          border-color: rgba(var(--accent-violet-bright-rgb),0.38);
           color: #c4c9f0;
         }
         .coach-scroll::-webkit-scrollbar { width: 3px; }
         .coach-scroll::-webkit-scrollbar-track { background: transparent; }
-        .coach-scroll::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.18); border-radius: 2px; }
+        .coach-scroll::-webkit-scrollbar-thumb { background: rgba(var(--accent-violet-rgb),0.18); border-radius: 2px; }
       `}</style>
 
       <div style={{
@@ -296,7 +296,7 @@ export default function AICoach() {
             alignItems: 'center',
             gap: 12,
             padding: '14px 24px',
-            borderBottom: '1px solid rgba(124,58,237,0.11)',
+            borderBottom: '1px solid rgba(var(--accent-violet-rgb),0.11)',
             flexShrink: 0,
           }}
         >
@@ -322,9 +322,9 @@ export default function AICoach() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
               <div style={{
                 width: 6, height: 6, borderRadius: '50%',
-                background: '#10b981', boxShadow: '0 0 5px #10b981',
+                background:  'var(--accent-green)' , boxShadow: '0 0 5px #10b981',
               }} />
-              <span style={{ fontFamily: 'monospace', color: '#10b981', fontSize: '0.56rem' }}>
+              <span style={{ fontFamily: 'monospace', color:  'var(--accent-green)' , fontSize: '0.56rem' }}>
                 ONLINE · claude-sonnet-4-6
               </span>
             </div>
@@ -333,8 +333,8 @@ export default function AICoach() {
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{
               fontFamily: 'Orbitron', fontWeight: 700, fontSize: '0.5rem', letterSpacing: '0.1em',
-              color: '#06b6d4', background: 'rgba(6,182,212,0.08)',
-              border: '1px solid rgba(6,182,212,0.22)', padding: '3px 8px', borderRadius: 3,
+              color:  'var(--accent-cyan)' , background: 'rgba(var(--accent-cyan-rgb),0.08)',
+              border: '1px solid rgba(var(--accent-cyan-rgb),0.22)', padding: '3px 8px', borderRadius: 3,
             }}>
               AI POWERED
             </span>
@@ -371,8 +371,8 @@ export default function AICoach() {
           style={{
             flexShrink: 0,
             padding: '10px 24px 16px',
-            borderTop: '1px solid rgba(124,58,237,0.11)',
-            background: 'rgba(8,9,15,0.6)',
+            borderTop: '1px solid rgba(var(--accent-violet-rgb),0.11)',
+            background: 'rgba(var(--bg-base-rgb),0.6)',
           }}
         >
           {/* Prompt chips — always inside the input zone, above textarea */}
@@ -397,8 +397,8 @@ export default function AICoach() {
               display: 'flex',
               alignItems: 'flex-end',
               gap: 10,
-              background: 'rgba(13,15,26,0.85)',
-              border: '1px solid rgba(124,58,237,0.22)',
+              background: 'rgba(var(--bg-surface-rgb),0.85)',
+              border: '1px solid rgba(var(--accent-violet-rgb),0.22)',
               borderRadius: 13,
               padding: '10px 12px 10px 16px',
             }}
@@ -436,17 +436,17 @@ export default function AICoach() {
                 flexShrink: 0,
                 width: 34, height: 34,
                 borderRadius: 9,
-                border: `1px solid ${input.trim() && !loading ? 'rgba(139,92,246,0.38)' : 'rgba(124,58,237,0.1)'}`,
+                border: `1px solid ${input.trim() && !loading ? 'rgba(var(--accent-violet-bright-rgb),0.38)' : 'rgba(var(--accent-violet-rgb),0.1)'}`,
                 background: input.trim() && !loading
                   ? 'linear-gradient(135deg, #7c3aed, #06b6d4)'
-                  : 'rgba(124,58,237,0.07)',
+                  : 'rgba(var(--accent-violet-rgb),0.07)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: input.trim() && !loading ? 'pointer' : 'not-allowed',
                 transition: 'background 0.15s, border-color 0.15s',
               }}
             >
               {loading
-                ? <Loader2 size={13} color="#4a4f72" style={{ animation: 'spin 1s linear infinite' }} />
+                ? <Loader2 size={13} color= "var(--text-dim)"  style={{ animation: 'spin 1s linear infinite' }} />
                 : <Send size={13} color={input.trim() ? 'white' : '#363a58'} />
               }
             </button>

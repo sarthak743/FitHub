@@ -21,9 +21,9 @@ function weightToKg(value, unit) {
   return unit === 'kg' ? v : v * 0.453592;
 }
 function bmiCategory(bmi) {
-  if (bmi < 18.5) return { label: 'Underweight', color: '#06b6d4', pct: ((bmi - 10) / 30) * 100 };
-  if (bmi < 25)   return { label: 'Normal',       color: '#10b981', pct: ((bmi - 10) / 30) * 100 };
-  if (bmi < 30)   return { label: 'Overweight',   color: '#f59e0b', pct: ((bmi - 10) / 30) * 100 };
+  if (bmi < 18.5) return { label: 'Underweight', color:  'var(--accent-cyan)' , pct: ((bmi - 10) / 30) * 100 };
+  if (bmi < 25)   return { label: 'Normal',       color:  'var(--accent-green)' , pct: ((bmi - 10) / 30) * 100 };
+  if (bmi < 30)   return { label: 'Overweight',   color:  'var(--accent-amber)' , pct: ((bmi - 10) / 30) * 100 };
   return             { label: 'Obese',           color: '#ef4444', pct: Math.min(((bmi - 10) / 30) * 100, 100) };
 }
 
@@ -35,7 +35,7 @@ const LABEL_STYLE = { color: '#3e4268', fontSize: '0.68rem', letterSpacing: '0.1
 function SectionEyebrow({ children }) {
   return (
     <div className="flex items-center gap-4 mb-6">
-      <div style={{ width: 4, height: 20, background: 'rgba(124,58,237,0.5)', borderRadius: 2, flexShrink: 0 }} />
+      <div style={{ width: 4, height: 20, background: 'rgba(var(--accent-violet-rgb),0.5)', borderRadius: 2, flexShrink: 0 }} />
       <span className="font-display font-bold" style={{ color: '#6b7196', fontSize: '0.8rem', letterSpacing: '0.14em' }}>
         {children}
       </span>
@@ -72,7 +72,7 @@ function CyberSelect({ value, onChange, options }) {
         }}
       >
         {options.map(o => (
-          <option key={o.value} value={o.value} style={{ background: '#0d0f1a' }}>
+          <option key={o.value} value={o.value} style={{ background:  'var(--bg-surface)'  }}>
             {o.label}
           </option>
         ))}
@@ -81,7 +81,7 @@ function CyberSelect({ value, onChange, options }) {
         size={14}
         style={{
           position: 'absolute', right: 12, top: '50%',
-          transform: 'translateY(-50%)', pointerEvents: 'none', color: '#4a4f72',
+          transform: 'translateY(-50%)', pointerEvents: 'none', color:  'var(--text-dim)' ,
         }}
       />
     </div>
@@ -95,7 +95,7 @@ function UnitToggle({ value, options, onChange }) {
         display: 'inline-flex',
         borderRadius: 6,
         overflow: 'hidden',
-        border: '1px solid rgba(124,58,237,0.22)',
+        border: '1px solid rgba(var(--accent-violet-rgb),0.22)',
         marginBottom: 12,
       }}
     >
@@ -108,8 +108,8 @@ function UnitToggle({ value, options, onChange }) {
             fontSize: '0.65rem',
             letterSpacing: '0.08em',
             padding: '6px 16px',
-            background: value === o ? 'rgba(124,58,237,0.3)' : 'transparent',
-            color: value === o ? '#c4b5fd' : '#4a4f72',
+            background: value === o ? 'rgba(var(--accent-violet-rgb),0.3)' : 'transparent',
+            color: value === o ? '#c4b5fd' :  'var(--text-dim)' ,
             border: 'none',
             cursor: 'pointer',
             transition: 'background 0.15s, color 0.15s',
@@ -125,7 +125,7 @@ function UnitToggle({ value, options, onChange }) {
 /* ─────────────────────────────────────────────
    FIELD CARD
 ───────────────────────────────────────────── */
-function FieldCard({ label, icon: Icon, color = '#8b5cf6', editing, readOnly, children }) {
+function FieldCard({ label, icon: Icon, color =  'var(--accent-violet-bright)' , editing, readOnly, children }) {
   const [hovered, setHovered] = useState(false);
   
   return (
@@ -134,14 +134,14 @@ function FieldCard({ label, icon: Icon, color = '#8b5cf6', editing, readOnly, ch
       onMouseLeave={() => setHovered(false)}
       style={{
         background: 'rgba(10,11,20,0.9)',
-        border: `1px solid ${readOnly ? 'rgba(124,58,237,0.06)' : editing ? 'rgba(124,58,237,0.4)' : hovered ? 'rgba(124,58,237,0.3)' : 'rgba(124,58,237,0.14)'}`,
+        border: `1px solid ${readOnly ? 'rgba(var(--accent-violet-rgb),0.06)' : editing ? 'rgba(var(--accent-violet-rgb),0.4)' : hovered ? 'rgba(var(--accent-violet-rgb),0.3)' : 'rgba(var(--accent-violet-rgb),0.14)'}`,
         borderRadius: 12,
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         transform: hovered && !editing ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered && !editing ? `0 8px 24px -8px ${color}44` : 'none',
+        boxShadow: hovered && !editing ? `0 8px 24px -8px ${window.themeColor(color, 0.44)}` : 'none',
         minHeight: 110,
         boxSizing: 'border-box',
         position: 'relative',
@@ -168,9 +168,9 @@ function FieldCard({ label, icon: Icon, color = '#8b5cf6', editing, readOnly, ch
                 marginLeft: 'auto',
                 fontSize: '0.55rem',
                 letterSpacing: '0.08em',
-                color: 'rgba(124,58,237,0.4)',
-                background: 'rgba(124,58,237,0.08)',
-                border: '1px solid rgba(124,58,237,0.15)',
+                color: 'rgba(var(--accent-violet-rgb),0.4)',
+                background: 'rgba(var(--accent-violet-rgb),0.08)',
+                border: '1px solid rgba(var(--accent-violet-rgb),0.15)',
                 borderRadius: 4,
                 padding: '2px 8px',
               }}
@@ -221,8 +221,8 @@ function BmiDisplay({ bmi }) {
             color: cat.color,
             fontSize: '0.65rem',
             letterSpacing: '0.08em',
-            background: `${cat.color}18`,
-            border: `1px solid ${cat.color}35`,
+            background: `${window.themeColor(cat.color, 0.18)}`,
+            border: `1px solid ${window.themeColor(cat.color, 0.35)}`,
             borderRadius: 5,
             padding: '3px 10px',
           }}
@@ -337,10 +337,10 @@ export default function Profile() {
 
   /* ── stat cards data ── */
   const stats = [
-    { label: 'Total Workouts',  value: user.totalWorkouts ?? 87,  unit: '',         color: '#8b5cf6', icon: Dumbbell,   key: null },
-    { label: 'Max Streak',      value: user.streak        ?? 12,  unit: 'days',     color: '#f59e0b', icon: Flame,      key: null },
-    { label: 'Weekly Target',   value: form.weeklyTarget,          unit: 'sessions', color: '#06b6d4', icon: Trophy,     key: 'weeklyTarget' },
-    { label: 'Weekly Step Goal',value: form.weeklyStepGoal.toLocaleString(), unit: 'steps', color: '#10b981', icon: Footprints, key: 'weeklyStepGoal' },
+    { label: 'Total Workouts',  value: user.totalWorkouts ?? 87,  unit: '',         color:  'var(--accent-violet-bright)' , icon: Dumbbell,   key: null },
+    { label: 'Max Streak',      value: user.streak        ?? 12,  unit: 'days',     color:  'var(--accent-amber)' , icon: Flame,      key: null },
+    { label: 'Weekly Target',   value: form.weeklyTarget,          unit: 'sessions', color:  'var(--accent-cyan)' , icon: Trophy,     key: 'weeklyTarget' },
+    { label: 'Weekly Step Goal',value: form.weeklyStepGoal.toLocaleString(), unit: 'steps', color:  'var(--accent-green)' , icon: Footprints, key: 'weeklyStepGoal' },
   ];
 
   return (
@@ -354,7 +354,7 @@ export default function Profile() {
         <div style={{ marginBottom: 40 }}>
           <h1
             className="font-display font-bold"
-            style={{ color: '#e8eaff', fontSize: '2.2rem', letterSpacing: '0.08em', margin: 0 }}
+            style={{ color:  'var(--text-primary)' , fontSize: '2.2rem', letterSpacing: '0.08em', margin: 0 }}
           >
             YOUR PROFILE
           </h1>
@@ -371,20 +371,20 @@ export default function Profile() {
           onMouseLeave={() => setHeroHovered(false)}
           style={{
             borderRadius: 18,
-            border: `1px solid ${heroHovered ? 'rgba(124,58,237,0.35)' : 'rgba(124,58,237,0.22)'}`,
-            background: 'linear-gradient(140deg, rgba(124,58,237,0.1) 0%, rgba(6,182,212,0.04) 100%)',
+            border: `1px solid ${heroHovered ? 'rgba(var(--accent-violet-rgb),0.35)' : 'rgba(var(--accent-violet-rgb),0.22)'}`,
+            background: 'linear-gradient(140deg, rgba(var(--accent-violet-rgb),0.1) 0%, rgba(var(--accent-cyan-rgb),0.04) 100%)',
             overflow: 'hidden',
             position: 'relative',
             marginBottom: 48,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             transform: heroHovered ? 'translateY(-4px)' : 'translateY(0)',
-            boxShadow: heroHovered ? '0 12px 32px -12px rgba(124,58,237,0.3)' : 'none',
+            boxShadow: heroHovered ? '0 12px 32px -12px rgba(var(--accent-violet-rgb),0.3)' : 'none',
           }}
         >
           {/* ambient right glow */}
           <div style={{
             position: 'absolute', right: 0, top: 0, width: 320, height: '100%', pointerEvents: 'none',
-            background: 'radial-gradient(ellipse at 90% 40%, rgba(6,182,212,0.09) 0%, transparent 65%)',
+            background: 'radial-gradient(ellipse at 90% 40%, rgba(var(--accent-cyan-rgb),0.09) 0%, transparent 65%)',
           }} />
 
           {/* ── top zone: avatar + identity + edit button ── */}
@@ -407,7 +407,7 @@ export default function Profile() {
                   background: profileImage
                     ? 'transparent'
                     : 'linear-gradient(145deg, #7c3aed 0%, #06b6d4 100%)',
-                  boxShadow: '0 0 0 1px rgba(124,58,237,0.35), 0 0 32px rgba(124,58,237,0.28)',
+                  boxShadow: '0 0 0 1px rgba(var(--accent-violet-rgb),0.35), 0 0 32px rgba(var(--accent-violet-rgb),0.28)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontFamily: 'Orbitron', fontWeight: 700, fontSize: '1.85rem',
                   color: 'white', letterSpacing: '0.04em', flexShrink: 0,
@@ -458,7 +458,7 @@ export default function Profile() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
                 className="font-display font-bold"
-                style={{ color: '#e8eaff', fontSize: '1.8rem', letterSpacing: '0.06em', marginBottom: 8 }}
+                style={{ color:  'var(--text-primary)' , fontSize: '1.8rem', letterSpacing: '0.06em', marginBottom: 8 }}
               >
                 {form.name.toUpperCase()}
               </div>
@@ -500,7 +500,7 @@ export default function Profile() {
                 </div>  
               )}
               {saved && (
-                <div className="font-mono-code" style={{ color: '#10b981', fontSize: '0.75rem', letterSpacing: '0.08em' }}>
+                <div className="font-mono-code" style={{ color:  'var(--accent-green)' , fontSize: '0.75rem', letterSpacing: '0.08em' }}>
                   ✓ CHANGES SAVED
                 </div>
               )}
@@ -508,7 +508,7 @@ export default function Profile() {
           </div>
 
           {/* ── divider ── */}
-          <div style={{ height: 1, background: 'rgba(124,58,237,0.1)', margin: '0 40px' }} />
+          <div style={{ height: 1, background: 'rgba(var(--accent-violet-rgb),0.1)', margin: '0 40px' }} />
 
           {/* ── bottom zone: 3 achievements in a horizontal bar ── */}
           <div
@@ -519,9 +519,9 @@ export default function Profile() {
             }}
           >
             {[
-              { icon: Flame,    color: '#f59e0b', value: '12-Day Streak', sub: 'Current Streak' },
-              { icon: Dumbbell, color: '#8b5cf6', value: '87 Workouts',   sub: 'Logged Total'   },
-              { icon: null,     color: '#10b981', value: '4.2 kg Lost',   sub: 'Since Jan 2025' },
+              { icon: Flame,    color:  'var(--accent-amber)' , value: '12-Day Streak', sub: 'Current Streak' },
+              { icon: Dumbbell, color:  'var(--accent-violet-bright)' , value: '87 Workouts',   sub: 'Logged Total'   },
+              { icon: null,     color:  'var(--accent-green)' , value: '4.2 kg Lost',   sub: 'Since Jan 2025' },
             ].map((a, i) => (
               <div
                 key={i}
@@ -530,17 +530,17 @@ export default function Profile() {
                   alignItems: 'center',
                   gap: 16,
                   padding: '10px 20px 10px 16px',
-                  borderRight: i < 2 ? '1px solid rgba(124,58,237,0.1)' : 'none',
+                  borderRight: i < 2 ? '1px solid rgba(var(--accent-violet-rgb),0.1)' : 'none',
                 }}
               >
                 {a.icon && (
                   <div style={{
                     width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-                    background: `${a.color}14`, border: `1px solid ${a.color}2a`,
+                    background: `${window.themeColor(a.color, 0.14)}`, border: `1px solid ${window.themeColor(a.color, 0.16)}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all 0.3s ease',
                     transform: heroHovered ? 'scale(1.1)' : 'scale(1)',
-                    boxShadow: heroHovered ? `0 0 12px ${a.color}33` : 'none',
+                    boxShadow: heroHovered ? `0 0 12px ${window.themeColor(a.color, 0.33)}` : 'none',
                   }}>
                     <a.icon size={18} style={{ color: a.color }} />
                   </div>
@@ -548,7 +548,7 @@ export default function Profile() {
                 {!a.icon && (
                   <div style={{
                     width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-                    background: `${a.color}14`, border: `1px solid ${a.color}2a`,
+                    background: `${window.themeColor(a.color, 0.14)}`, border: `1px solid ${window.themeColor(a.color, 0.16)}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '1.1rem',
                     transition: 'all 0.3s ease',
@@ -582,21 +582,21 @@ export default function Profile() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
 
             {/* Full Name */}
-            <FieldCard label="Full Name" icon={User} color="#8b5cf6" editing={editing}>
+            <FieldCard label="Full Name" icon={User} color= "var(--accent-violet-bright)"  editing={editing}>
               {editing
                 ? <CyberInput value={form.name} onChange={set('name')} placeholder="Full name" />
                 : <FieldValue>{form.name}</FieldValue>}
             </FieldCard>
 
             {/* Age */}
-            <FieldCard label="Age" icon={Calendar} color="#06b6d4" editing={editing}>
+            <FieldCard label="Age" icon={Calendar} color= "var(--accent-cyan)"  editing={editing}>
               {editing
                 ? <CyberInput value={form.age} onChange={set('age')} type="number" placeholder="Years" />
                 : <FieldValue>{form.age} yrs</FieldValue>}
             </FieldCard>
 
             {/* Height */}
-            <FieldCard label="Height" icon={Ruler} color="#f59e0b" editing={editing}>
+            <FieldCard label="Height" icon={Ruler} color= "var(--accent-amber)"  editing={editing}>
               {editing ? (
                 <div>
                   <UnitToggle value={form.heightUnit} options={['cm', 'ft']} onChange={set('heightUnit')} />
@@ -616,7 +616,7 @@ export default function Profile() {
             </FieldCard>
 
             {/* Weight */}
-            <FieldCard label="Current Weight" icon={Weight} color="#10b981" editing={editing}>
+            <FieldCard label="Current Weight" icon={Weight} color= "var(--accent-green)"  editing={editing}>
               {editing ? (
                 <div>
                   <UnitToggle value={form.weightUnit} options={['kg', 'lbs']} onChange={set('weightUnit')} />
@@ -631,7 +631,7 @@ export default function Profile() {
             </FieldCard>
 
             {/* Fitness Goal */}
-            <FieldCard label="Fitness Goal" icon={Target} color="#ec4899" editing={editing}>
+            <FieldCard label="Fitness Goal" icon={Target} color= "var(--accent-pink)"  editing={editing}>
               {editing
                 ? <CyberSelect value={form.goal} onChange={set('goal')} options={GOAL_OPTIONS} />
                 : <FieldValue>{form.goal}</FieldValue>}
@@ -669,12 +669,12 @@ export default function Profile() {
                     borderRadius: 14,
                     overflow: 'hidden',
                     background: 'rgba(10,11,20,0.9)',
-                    border: `1px solid ${hovered && !editing ? 'rgba(124,58,237,0.3)' : s.color + '1c'}`,
+                    border: `1px solid ${hovered && !editing ? 'rgba(var(--accent-violet-rgb),0.3)' : s.color + '1c'}`,
                     display: 'flex',
                     flexDirection: 'column',
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     transform: hovered && !editing ? 'translateY(-4px)' : 'translateY(0)',
-                    boxShadow: hovered && !editing ? `0 8px 24px -8px ${s.color}44` : 'none',
+                    boxShadow: hovered && !editing ? `0 8px 24px -8px ${window.themeColor(s.color, 0.44)}` : 'none',
                   }}
                 >
                   {/* top accent bar */}
@@ -726,11 +726,11 @@ export default function Profile() {
                         </div>
                       )}
                       {/* label + unit stacked */}
-                      <div className="font-mono-code" style={{ color: '#4a4f72', fontSize: '0.75rem', letterSpacing: '0.07em', lineHeight: 1.5 }}>
+                      <div className="font-mono-code" style={{ color:  'var(--text-dim)' , fontSize: '0.75rem', letterSpacing: '0.07em', lineHeight: 1.5 }}>
                         {s.label.toUpperCase()}
                       </div>
                       {s.unit && (
-                        <div className="font-mono-code" style={{ color: `${s.color}55`, fontSize: '0.65rem', letterSpacing: '0.06em' }}>
+                        <div className="font-mono-code" style={{ color: `${window.themeColor(s.color, 0.55)}`, fontSize: '0.65rem', letterSpacing: '0.06em' }}>
                           {s.unit.toUpperCase()}
                         </div>
                       )}
